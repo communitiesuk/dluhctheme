@@ -27,6 +27,8 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
          E, E+W, GB, UK. These represent England, England and Wales, Great Britain and United Kingdom respectively")
   }
 
+
+
   codes_match <-
     data.frame(
       country = c("E","E+W","GB","UK"),
@@ -75,10 +77,16 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
     rename("LA_Code"=all_of(LA_map_colname)) %>%
     filter(str_detect(LA_Code,codes_match$codes[which(codes_match$country==countries)]))
 
+  original_rows <- nrow(.data)
+
   .data  <- .data %>%
     mutate(LA_Code = {{LA_col}}) %>%
     left_join(LA_map_data,., by = c("LA_Code"))
 
+  matched_rows <- nrow(inner_join(.data,as.data.frame(LA_map_data),by=c("LA_Code")))
+
+  print(original_rows)
+  print(matched_rows)
   map <-
     ggplot(.data) +
     geom_sf(aes(fill = {{variable}}),colour = "black",size=0.02) +
@@ -138,4 +146,5 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
       return(finalmap)
     }
 }
+
 
