@@ -13,8 +13,23 @@
 #' @examples
 #' df <- dluhctheme::GDP_Prediction
 #' forecast_timeseries(df,year,ycol=GDP,cutdate = 2022,dateformat = "%Y", label_names = c("Forecast","Actual"))
-forecast_timeseries <- function(.data,xcol,ycol,cutdate,dateformat,dottedline=TRUE,label_names = c("Predicted","Actual")){
+forecast_timeseries <- function(.data,xcol,ycol,cutdate,dateformat="%Y-%m-%d",dottedline=TRUE,label_names = c("Predicted","Actual")){
   library(tidyverse)
+
+  is.convertible.to.date <- function(x) !is.na(as.Date(as.character(x), tz = 'UTC', format = dateformat))
+
+  if(any(is.convertible.to.date(pull(.data,{{datecol}}))==FALSE)){
+    stop("Date column not in format specified, or contains some NA values. Check the dateformat argument in the function")
+  }
+
+  if(any(replace_na(is.numeric(pull(.data,{{ycol}})),TRUE)==FALSE)){
+    stop("Value column contains non-numeric values. Check your data and try again")
+  }
+
+  if(is.convertible.to.date(cutdate)==FALSE){
+    stop("Cut date not in format specified. Check the dateformat argument in the function")
+  }
+
   cutdate = as.Date(cutdate,tryFormats = dateformat)
 
 .data <- .data %>%
