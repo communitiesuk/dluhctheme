@@ -39,5 +39,5 @@ dluhc_highlighted_time_series <-
     geom_line(aes(Date,value,colour=GROUP), colour = "#012169")+
     facet_wrap(~ GROUP, scales='free',strip.position="top") +
     gghighlight(use_direct_label = FALSE) +
-    dluhc_theme(size = textsize)
+    dluhctheme::dluhc_style(size = textsize)
   }

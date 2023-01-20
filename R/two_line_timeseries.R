@@ -38,6 +38,6 @@ two_line_timeseries <- function(.data,datecol,ycol,groupcol,dateformat = "%Y-%m-
     scale_color_manual(values=c("#012169","#6b98fe")) +
     theme_classic(base_size = 18) +
     scale_y_continuous(expand = c(0,0)) +
-    dluhctheme::dluhc_theme()
+    dluhctheme::dluhc_style()
 }
 

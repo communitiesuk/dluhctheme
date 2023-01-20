@@ -6,10 +6,10 @@
 #' @export
 #'
 #' @examples
-#' df <- dplyr::filter(gapminder::gapminder,country == "Austria")
+#' df <- dluhctheme::Net_Additions
 #' ggplot(df, aes(x = year, y=lifeExp))
-#' + dluhc_theme()
-dluhc_theme <- function(size = 2) {
+#' + dluhc_style()
+dluhc_style <- function(size = 2) {
 
     ggplot2::theme(
 

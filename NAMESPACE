@@ -2,7 +2,7 @@
 
 export(LA_map)
 export(dluhc_highlighted_time_series)
-export(dluhc_theme)
+export(dluhc_style)
 export(finalise_plot)
 export(forecast_timeseries)
 export(one_line_timeseries)
