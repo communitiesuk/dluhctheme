@@ -52,6 +52,13 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
     stop("The year you have selected is outside the range of maps available. Please contact the package owner to update the maps available")
   }
 
+  rawdata_LA_Col <- .data %>%
+  pull({{LA_col}})
+  
+  correct_LA_codes <- codes_match$codes[which(codes_match$country == countries)]
+  
+  if(any_of(str_detect(rawdata_LA_Col,correct_LA_codes))==FALSE){
+    stop("The data you have provided does not have the local authority codes in the correct format for the countries you have selected")
 
 
   library(cowplot)
