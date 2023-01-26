@@ -85,8 +85,8 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
 
   matched_rows <- nrow(inner_join(.data,as.data.frame(LA_map_data),by=c("LA_Code")))
 
-  print(original_rows)
-  print(matched_rows)
+  print(paste0("Your original data had ",original_rows," rows of data"))
+  print(paste0("On the map, there were ",matched_rows," matches"))
   map <-
     ggplot(.data) +
     geom_sf(aes(fill = {{variable}}),colour = "black",size=0.02) +
