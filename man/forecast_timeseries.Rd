@@ -37,5 +37,5 @@ Create a single line time series graph in a dluhc theme for a line which has a p
 }
 \examples{
 df <- dluhctheme::GDP_Prediction
-forecast_timeseries(df,year,ycol=GDP,cutdate = 2022,dateformat = "\%Y", label_names = c("Forecast","Actual"))
+forecast_timeseries(df,year,ycol=GDP,cutdate = "31/03/2022",dateformat = "\%d/\%m/\%Y", label_names = c("Forecast","Actual"))
 }

@@ -24,5 +24,5 @@ Create a 2 line time series graph in a DLUHC style
 \examples{
 df <- dluhctheme::Social_Housing_Sales
 
-two_line_timeseries(.data=df,datecol = year, ycol = value, groupcol = type, dateformat = "\%Y")
+two_line_timeseries(.data=df,datecol = year, ycol = count, groupcol = type, dateformat = "\%Y")
 }
