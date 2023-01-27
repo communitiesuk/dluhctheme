@@ -40,4 +40,3 @@ two_line_timeseries <- function(.data,datecol,ycol,groupcol,dateformat = "%Y-%m-
     scale_y_continuous(expand = c(0,0)) +
     dluhctheme::dluhc_style()
 }
-

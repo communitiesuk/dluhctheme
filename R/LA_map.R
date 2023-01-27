@@ -5,7 +5,7 @@
 #' @param variable The column in the .data which has the numeric value to be mapped
 #' @param LA_col The column which contains the Local Authority code
 #' @param map_colours The colour which you want to represent the low and high values, must be in vector form
-#' @param year The year which the LA codes you are using relate to
+#' @param year The financial year which the LA codes you are using relate to, given in quotations
 #' @param countries The countries which you wish to appear on the map. These are E, E+W, GB and UK for England, England+Wales, Great Britain and United Kingdom respectively
 #' @param save A TRUE/FALSE statement if you want the file to be exported as a png file. If TRUE, the filepath must be defined
 #' @param filepath If save is TRUE, filepath is the save location of the png output must be in the form of quotations
@@ -14,8 +14,8 @@
 #' @export
 #'
 #' @examples
-#' df <- dluhctheme::Net_Additions_LA
-#' LA_map(df,variable = Net_Additions_per_1000,LA_col = LA_Code,year = 2021,countries = "E",save = TRUE, filepath = "Net_Additions_map.png")
+#' df <- dluhctheme::Help_to_Buy
+#' LA_map(df,variable = Completions,LA_col = LA_Code,year = "2020-21",countries = "E",save = TRUE, filepath = "Help_to_Buy_map.png")
 LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),year = 2022,countries = "E",save = FALSE,filepath = NULL){
 
   library(tidyverse)
@@ -43,23 +43,23 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
 
   map_match <-
     data.frame(
-      year = c(2020,2021,2022),
+      year = c("2020-21","2021-22","2022-23"),
       filenames = c("LAD_Dec2020_BUC","LAD_May2021_BUC","LAD_Dec2022_BUC"),
       LA_Column = c("LAD20CD","LAD21CD","LAD22CD")
     )
 
-  if(year>max(map_match$year)|year<min(map_match$year)){
+  if(!(year %in% map_match$year)){
     stop("The year you have selected is outside the range of maps available. Please contact the package owner to update the maps available")
   }
 
   rawdata_LA_Col <- .data %>%
   pull({{LA_col}})
-  
+
   correct_LA_codes <- codes_match$codes[which(codes_match$country == countries)]
-  
+
   if(any_of(str_detect(rawdata_LA_Col,correct_LA_codes))==FALSE){
     stop("The data you have provided does not have the local authority codes in the correct format for the countries you have selected")
-
+  }
 
   library(cowplot)
 
