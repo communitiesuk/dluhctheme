@@ -7,7 +7,7 @@
 #' @param dottedline A TRUE/FALSE statement to decide if you want a vertical dotted line on the graph to split the prediction and the recorded values
 #' @param label_names A vector containing the 2 words you want as the label for your lines, the default is c("Predicted", "Actual")
 #' @param dateformat The format which the date is presented in using the standard R date format, see here for more detail https://www.statology.org/r-date-format/
-#' @return
+#' @return a ggplot2 object
 #' @export
 #'
 #' @examples
