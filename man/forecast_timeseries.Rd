@@ -6,7 +6,7 @@
 \usage{
 forecast_timeseries(
   .data,
-  xcol,
+  datecol,
   ycol,
   cutdate,
   dateformat = "\%Y-\%m-\%d",
@@ -17,7 +17,7 @@ forecast_timeseries(
 \arguments{
 \item{.data}{A dataframe in long format with 2 columns necesarry: Date and value}
 
-\item{xcol}{The column name which contains the date value in a widely used date format}
+\item{datecol}{The column name which contains the date value in a widely used date format}
 
 \item{ycol}{The column name which contains the values}
 
