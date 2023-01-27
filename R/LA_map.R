@@ -63,10 +63,10 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
 
   library(cowplot)
 
-  if(year==2020){
+  if(year=="2020-21"){
     data("LAD_Dec2020_BUC")
     LA_map_data <- LAD_Dec2020_BUC
-  }else if(year == 2021){
+  }else if(year == "2021-22"){
     data("LAD_May2021_BUC")
     LA_map_data <- LAD_May2021_BUC
 
