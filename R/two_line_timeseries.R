@@ -11,7 +11,7 @@
 #' @examples
 #' df <- dluhctheme::Social_Housing_Sales
 #'
-#' two_line_timeseries(.data=df,datecol = year, ycol = value, groupcol = type, dateformat = "%Y")
+#' two_line_timeseries(.data=df,datecol = year, ycol = count, groupcol = type, dateformat = "%Y")
 
 two_line_timeseries <- function(.data,datecol,ycol,groupcol,dateformat = "%Y-%m-%d"){
   library(tidyverse)
