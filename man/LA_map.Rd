@@ -24,7 +24,7 @@ LA_map(
 
 \item{map_colours}{The colour which you want to represent the low and high values, must be in vector form}
 
-\item{year}{The year which the LA codes you are using relate to}
+\item{year}{The financial year which the LA codes you are using relate to, given in quotations}
 
 \item{countries}{The countries which you wish to appear on the map. These are E, E+W, GB and UK for England, England+Wales, Great Britain and United Kingdom respectively}
 
@@ -39,6 +39,6 @@ a ggplot map, or a png file if save is TRUE
 Create a standard theme map from an sf object
 }
 \examples{
-df <- dluhctheme::Net_Additions_LA
-LA_map(df,variable = Net_Additions_per_1000,LA_col = LA_Code,year = 2021,countries = "E",save = TRUE, filepath = "Net_Additions_map.png")
+df <- dluhctheme::Help_to_Buy
+LA_map(df,variable = Completions,LA_col = LA_Code,year = "2020-21",countries = "E",save = TRUE, filepath = "Help_to_Buy_map.png")
 }

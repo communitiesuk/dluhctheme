@@ -9,7 +9,7 @@ forecast_timeseries(
   xcol,
   ycol,
   cutdate,
-  dateformat,
+  dateformat = "\%Y-\%m-\%d",
   dottedline = TRUE,
   label_names = c("Predicted", "Actual")
 )
@@ -28,6 +28,9 @@ forecast_timeseries(
 \item{dottedline}{A TRUE/FALSE statement to decide if you want a vertical dotted line on the graph to split the prediction and the recorded values}
 
 \item{label_names}{A vector containing the 2 words you want as the label for your lines, the default is c("Predicted", "Actual")}
+}
+\value{
+a ggplot2 object
 }
 \description{
 Create a single line time series graph in a dluhc theme for a line which has a predicted/forecast value
