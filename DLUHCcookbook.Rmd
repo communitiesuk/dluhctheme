@@ -19,6 +19,7 @@ pacman::p_load('dplyr', 'tidyr', 'gapminder',
 
 options(scipen = 999)
 ```
+
 ## Credit to BBC data team
 This cookbook has been copied from the much better BBC rcookbook, and reapplied to work for creating graphics in a DLUHC style. Credit must go to the BBC data team for their fantastic product which the team at DLUHC have essentially copied for our own use.
 
@@ -67,7 +68,8 @@ Specific functions:
 The other functions are used as a quick tool for instantly creating a particular type of formatted graph based on a set shape of data inputted. These are less adaptable, but allow a user to create a graph in one line of code:
 `one_line_timeseries()`, `two_line_timeseries()`, `facet_highlight_timeseries()`, `LA_map()`, `facet_barchart()`, `forecast_timeseries()`
 These functions allow you to create a data visualisation in a set theme instantly but are more fixed in some of their formatting. Examples of these functions can all be found later in this document
-### Style functions
+
+### Style function
 `dluhc_style()`:is added to the ggplot 'chain' after you have created a plot and has one argument for text size. What it does is generally makes text size, font and colour, axis lines, axis text, margins and many other standard chart components into DLUHC style, which has been mainly copied from the BBC data team with some slight tweaks based on the best practise suggestions by the Analysis Function and ONS.
 
 Note that colours for lines in the case of a line chart or bars for a bar chart, do not come out of the box from the `dluhc_style()` function, but need to be explicitly set in your other standard `ggplot` chart functions.
@@ -142,7 +144,7 @@ Example of how the `finalise_plot()` is used in a standard workflow. This functi
 
 ``` {r eval = FALSE}
 finalise_plot(plot_name = my_line_plot,
-              source = "Source: Net Additional Dwellings 2021, DLUHC",
+              source = "Source: Example source",
               save_filepath = "filename_that_my_plot_should_be_saved_to.png",
               width_pixels = 640,
               height_pixels = 450,
@@ -158,8 +160,8 @@ The finalise_plot() function does more than just save out your chart, it also le
 So how can you save out the example plot created above?
 
 ``` {r eval = FALSE}
-finalise_plot(plot_name = line,
-              source = " Source: Net Additional Dwellings 2021, DLUHC ",
+finalise_plot(plot_name = styled_line,
+              source = " Source: Social Housing Sales 2021, DLUHC ",
               save_filepath = "images/line_plot_finalised_test.png",
               width_pixels = 640,
               height_pixels = 550)
@@ -275,6 +277,8 @@ NetAdd_graph <- Cleaned_data %>%
   ggplot(aes(x = date, y = Net_Additions, groups = Region)) +
   geom_line(aes(colour = Region)) +
   dluhc_style()
+
+NetAdd_graph
 ```
 
 As you can see, the graph above is very messy and difficult to follow each region individually easily. One option is to facet the graphs by region, using the `facet_wrap` function:
@@ -285,6 +289,8 @@ ggplot(aes(x = date, y = Net_Additions, groups = Region)) +
 geom_line() +
 facet_wrap(~Region,scales="fixed") +
 dluhc_style(size = 1)
+
+NetAdd_graph
 ```
 
 The `dluhc_style` function has a size variable which is useful to set to 1 for a faceted time series, as it looks quite busy if the text size is set to the same as it would otherwise be on a normal time series.
@@ -348,7 +354,7 @@ Forecast_df_2 <- Forecast_df %>%
   add_row(year = "31/03/2022",date = as.Date("2022-03-31"),GDP=100,type = "Predicted") %>%
   arrange(date)
 
-Forecast_df_2
+kable(Forecast_df_2)
 ```
 
 ```{r}
