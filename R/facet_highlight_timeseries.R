@@ -12,8 +12,8 @@
 #'
 #' @examples
 #' df <- dplyr::filter(gapminder::gapminder,country %in% c("Austria","India","China","France")
-#' facet_highlight_time_series(.data=df,datecol = year, ycol = lifeExp, groupcol = country, dateformat = "%Y")
-facet_highlighted_time_series <-
+#' facet_highlight_timeseries(.data=df,datecol = year, ycol = lifeExp, groupcol = country, dateformat = "%Y")
+facet_highlight_timeseries <-
   function(.data,datecol,ycol,groupcol,textsize = 1,dateformat="%Y-%m-%d"){
 
     library(gghighlight)
