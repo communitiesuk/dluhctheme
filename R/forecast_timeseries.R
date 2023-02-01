@@ -5,15 +5,15 @@
 #' @param ycol The column name which contains the values
 #' @param cutdate The date which the predicted values begin from
 #' @param dottedline A TRUE/FALSE statement to decide if you want a vertical dotted line on the graph to split the prediction and the recorded values
-#' @param label_names A vector containing the 2 words you want as the label for your lines, the default is c("Predicted", "Actual")
+#' @param label_names A vector containing the 2 words you want as the label for your lines, the default is c("Recorded", "Forecast")
 #' @param dateformat The format which the date is presented in using the standard R date format, see here for more detail https://www.statology.org/r-date-format/
 #' @return a ggplot2 object
 #' @export
 #'
 #' @examples
 #' df <- dluhctheme::GDP_Prediction
-#' forecast_timeseries(df,year,ycol=GDP,cutdate = "31/03/2022",dateformat = "%d/%m/%Y", label_names = c("Forecast","Actual"))
-forecast_timeseries <- function(.data,datecol,ycol,cutdate,dateformat="%Y-%m-%d",dottedline=TRUE,label_names = c("Predicted","Actual")){
+#' forecast_timeseries(df,year,ycol=GDP,cutdate = "31/03/2022",dateformat = "%d/%m/%Y", label_names = c("Actual","Predicted"))
+forecast_timeseries <- function(.data,datecol,ycol,cutdate,dateformat="%Y-%m-%d",dottedline=TRUE,label_names = c("Recorded","Forecast")){
   library(tidyverse)
 
   is.convertible.to.date <- function(x) !is.na(as.Date(as.character(x), tz = 'UTC', format = dateformat))
@@ -35,12 +35,12 @@ forecast_timeseries <- function(.data,datecol,ycol,cutdate,dateformat="%Y-%m-%d"
 .data <- .data %>%
     mutate(Date = as.Date({{datecol}},tryFormats = dateformat)) %>%
     mutate(value = {{ycol}}) %>%
-  mutate(prediction = ifelse(Date>=cutdate,label_names[1],label_names[2]))
+  mutate(prediction = ifelse(Date>=cutdate,label_names[2],label_names[1]))
 
 duplicate <- .data %>%
   mutate(check = ifelse(prediction!=lead(prediction),1,0)) %>%
   filter(check == 1) %>%
-  mutate(prediction = label_names[1]) %>%
+  mutate(prediction = label_names[2]) %>%
   select(!check)
 
 .data <- rbind(.data,duplicate)
@@ -49,7 +49,7 @@ duplicate <- .data %>%
   a <- ggplot2::ggplot(data = .data,aes(x = Date,y = value)) +
     geom_line(aes(linetype = factor(prediction,levels = c(label_names[1],label_names[2]))),size = 1.5, color = "#012169") +
     dluhctheme::dluhc_style() +
-    scale_linetype_manual(values = c("dashed","solid")) +
+    scale_linetype_manual(values = c("solid","dashed")) +
     theme(legend.key.width = unit(2,"cm"))
 
   if(dottedline){

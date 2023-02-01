@@ -11,7 +11,7 @@ forecast_timeseries(
   cutdate,
   dateformat = "\%Y-\%m-\%d",
   dottedline = TRUE,
-  label_names = c("Predicted", "Actual")
+  label_names = c("Recorded", "Forecast")
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ forecast_timeseries(
 
 \item{dottedline}{A TRUE/FALSE statement to decide if you want a vertical dotted line on the graph to split the prediction and the recorded values}
 
-\item{label_names}{A vector containing the 2 words you want as the label for your lines, the default is c("Predicted", "Actual")}
+\item{label_names}{A vector containing the 2 words you want as the label for your lines, the default is c("Recorded", "Forecast")}
 }
 \value{
 a ggplot2 object
@@ -37,5 +37,5 @@ Create a single line time series graph in a dluhc theme for a line which has a p
 }
 \examples{
 df <- dluhctheme::GDP_Prediction
-forecast_timeseries(df,year,ycol=GDP,cutdate = "31/03/2022",dateformat = "\%d/\%m/\%Y", label_names = c("Forecast","Actual"))
+forecast_timeseries(df,year,ycol=GDP,cutdate = "31/03/2022",dateformat = "\%d/\%m/\%Y", label_names = c("Actual","Predicted"))
 }
