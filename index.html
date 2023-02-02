@@ -56,8 +56,42 @@
 <div class="page-header"><h1 id="dluhc-cookbook-for-r-graphics">DLUHC cookbook for R graphics<a class="anchor" aria-label="anchor" href="#dluhc-cookbook-for-r-graphics"></a>
 </h1></div>
 <p>Last updated: 2023-02-02</p>
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<div class="section level2">
+<ul>
+<li><a href="#credit-to-bbc-data-team">Credit to BBC data team</a></li>
+<li>
+<a href="#how-to-create-dluhc-style-graphics">How to create DLUHC style graphics</a>
+<ul>
+<li><a href="#load-all-the-libraries-you-need">Load all the libraries you need</a></li>
+<li><a href="#install-the-dluhctheme-package">Install the dluhctheme package</a></li>
+<li><a href="#how-does-the-dluctheme-package-work">How does the dluctheme package work?</a></li>
+<li><a href="#style-function">Style function</a></li>
+<li><a href="#save-out-your-finished-chart">Save out your finished chart</a></li>
+</ul>
+</li>
+<li>
+<a href="#make-a-line-chart">Make a line chart</a>
+<ul>
+<li><a href="#single-line-chart">Single line chart</a></li>
+<li><a href="#dluhctheme-function">dluhctheme function</a></li>
+<li><a href="#multiple-line-chart">Multiple line chart</a></li>
+<li><a href="#dluhctheme-function-1">dluhctheme function</a></li>
+<li><a href="#using-facets">Using facets</a></li>
+<li><a href="#dluhctheme-function-2">dluhctheme function</a></li>
+<li><a href="#creating-a-forecast-time-series">Creating a forecast time series</a></li>
+<li><a href="#dluhctheme-function-3">dluhctheme function</a></li>
+</ul>
+</li>
+<li>
+<a href="#make-a-bar-chart">Make a bar chart</a>
+<ul>
+<li><a href="#stacked-bar-chart">Stacked bar chart</a></li>
+<li><a href="#grouped-bar-chart">Grouped bar chart</a></li>
+<li><a href="#faceted-bar-charts">Faceted bar charts</a></li>
+</ul>
+</li>
+<li><a href="#static-la-maps">Static LA Maps</a></li>
+</ul>
+<!-- README.md is generated from README.Rmd. Please edit that file --><div class="section level2">
 <h2 id="credit-to-bbc-data-team">Credit to BBC data team<a class="anchor" aria-label="anchor" href="#credit-to-bbc-data-team"></a>
 </h2>
 <p>This cookbook has been copied from the much better BBC rcookbook, and reapplied to work for creating graphics in a DLUHC style. Credit must go to the BBC data team for their fantastic product which the team at DLUHC have essentially copied for our own use.</p>
@@ -183,7 +217,7 @@
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="do">##         strip.text = ggplot2::element_text(size = size * 11, </span></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="do">##             hjust = 0))</span></span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="do">## }</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;bytecode: 0x14ed83a8&gt;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;bytecode: 0x14eaf5c0&gt;</span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;environment: namespace:dluhctheme&gt;</span></span></code></pre></div>
 <p>You can modify these settings for your chart, or add additional theme arguments, by calling the <code>theme</code> function with the arguments you want - but please note that for it to work you must call it <em>after</em> you have called the <code>dluhc_style</code> function. Otherwise <code><a href="reference/dluhc_style.html">dluhc_style()</a></code> will override it.</p>
 <p>This will add some gridlines, by adding extra theme arguments to what is included in the <code><a href="reference/dluhc_style.html">dluhc_style()</a></code> function. There are many similar examples throughout the cookbook.</p>
