@@ -2,6 +2,33 @@ DLUHC cookbook for R graphics
 ================
 Last updated: 2023-02-02
 
+-   [Credit to BBC data team](#credit-to-bbc-data-team)
+-   [How to create DLUHC style
+    graphics](#how-to-create-dluhc-style-graphics)
+    -   [Load all the libraries you
+        need](#load-all-the-libraries-you-need)
+    -   [Install the dluhctheme
+        package](#install-the-dluhctheme-package)
+    -   [How does the dluctheme package
+        work?](#how-does-the-dluctheme-package-work)
+    -   [Style function](#style-function)
+    -   [Save out your finished chart](#save-out-your-finished-chart)
+-   [Make a line chart](#make-a-line-chart)
+    -   [Single line chart](#single-line-chart)
+    -   [dluhctheme function](#dluhctheme-function)
+    -   [Multiple line chart](#multiple-line-chart)
+    -   [dluhctheme function](#dluhctheme-function-1)
+    -   [Using facets](#using-facets)
+    -   [dluhctheme function](#dluhctheme-function-2)
+    -   [Creating a forecast time
+        series](#creating-a-forecast-time-series)
+    -   [dluhctheme function](#dluhctheme-function-3)
+-   [Make a bar chart](#make-a-bar-chart)
+    -   [Stacked bar chart](#stacked-bar-chart)
+    -   [Grouped bar chart](#grouped-bar-chart)
+    -   [Faceted bar charts](#faceted-bar-charts)
+-   [Static LA Maps](#static-la-maps)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ## Credit to BBC data team
@@ -165,7 +192,7 @@ colour of the title element of the plot.
     ##         strip.text = ggplot2::element_text(size = size * 11, 
     ##             hjust = 0))
     ## }
-    ## <bytecode: 0x14ed83a8>
+    ## <bytecode: 0x14eaf5c0>
     ## <environment: namespace:dluhctheme>
 
 You can modify these settings for your chart, or add additional theme

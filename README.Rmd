@@ -1,7 +1,12 @@
 ---
 title: "DLUHC cookbook for R graphics"
 date: "Last updated: `r format(Sys.Date())`"
-output: github_document
+output: 
+  github_document:
+    toc: true
+    toc_depth: 4
+    #toc_float: true
+    #theme: cosmo
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
