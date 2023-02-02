@@ -1,3 +1,15 @@
+#' Title
+#'
+#' @param .data
+#' @param xcol
+#' @param ycol
+#' @param groupcol
+#' @param textsize
+#'
+#' @return
+#' @export
+#'
+#' @examples
 facet_barchart <- function(.data,xcol,ycol,groupcol,textsize=1){
 .data <- mutate(.data,variable = {{groupcol}})
 

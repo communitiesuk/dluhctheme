@@ -381,6 +381,133 @@ forecast_timeseries(.data = GDP_Deflator,
 * `dottedline` is a TRUE/FALSE variable, to whether you want a vertical dotted line at the cut date
 * `label_names` are the names given to the two lines
 
+## Make a bar chart
+
+```{r}
+#Prepare data
+bar_df <- gapminder %>%
+  filter(year == 2007 & continent == "Africa") %>%
+  arrange(desc(lifeExp)) %>%
+  head(5)
+
+#Make plot
+bars <- ggplot(bar_df, aes(x = country, y = lifeExp)) +
+  geom_bar(stat="identity", 
+           position="identity", 
+           fill="#1380A1") +
+  geom_hline(yintercept = 0, size = 1, colour="#333333") +
+  dluhc_style() +
+  labs(title="Reunion is highest",
+       subtitle = "Highest African life expectancy, 2007")
+```
+
+```{r echo=FALSE}
+plot(bars)
+```
+
+### Stacked bar chart
+
+```{r message=FALSE}
+#prepare data
+stacked_df <- gapminder %>% 
+  filter(year == 2007) %>%
+  mutate(lifeExpGrouped = cut(lifeExp, 
+                    breaks = c(0, 50, 65, 80, 90),
+                    labels = c("Under 50", "50-65", "65-80", "80+"))) %>%
+  group_by(continent, lifeExpGrouped) %>%
+  summarise(continentPop = sum(as.numeric(pop)))
+
+#set order of stacks by changing factor levels
+stacked_df$lifeExpGrouped = factor(stacked_df$lifeExpGrouped, levels = rev(levels(stacked_df$lifeExpGrouped)))
+
+#create plot
+stacked_bars <- ggplot(data = stacked_df, 
+                       aes(x = continent,
+                           y = continentPop,
+                           fill = lifeExpGrouped)) +
+  geom_bar(stat = "identity", 
+           position = "fill") +
+  dluhc_style() +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_viridis_d(direction = -1) +
+  geom_hline(yintercept = 0, size = 1, colour = "#333333") +
+  labs(title = "How life expectancy varies",
+       subtitle = "% of population by life expectancy band, 2007") +
+  theme(legend.position = "top", 
+        legend.justification = "left") +
+  guides(fill = guide_legend(reverse = TRUE))
+
+```
+
+```{r echo=FALSE}
+plot(stacked_bars)
+```
+
+This example shows proportions, but you might want to make a stacked bar chart showing number values instead - this is easy to change!
+
+The value passed to the `position` argument will determine if your stacked chart shows proportions or actual values. 
+
+`position = "fill"` will draw your stacks as proportions, and `position = "identity"` will draw number values. 
+
+### Grouped bar chart
+
+Making a grouped bar chart is very similar to making a bar chart. 
+
+You just need to change `position = "identity"` to `position = "dodge"`, and set the `fill` aesthetically instead:
+
+```{r message=FALSE}
+#Prepare data
+grouped_bar_df <- gapminder %>%
+  filter(year == 1967 | year == 2007) %>%
+  select(country, year, lifeExp) %>%
+  spread(year, lifeExp) %>%
+  mutate(gap = `2007` - `1967`) %>%
+  arrange(desc(gap)) %>%
+  head(5) %>%
+  gather(key = year, 
+         value = lifeExp,
+         -country,
+         -gap) 
+  
+#Make plot
+grouped_bars <- ggplot(grouped_bar_df, 
+                       aes(x = country, 
+                           y = lifeExp, 
+                           fill = as.factor(year))) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_hline(yintercept = 0, size = 1, colour="#333333") +
+  dluhc_style() +
+  scale_fill_manual(values = c("#1380A1", "#FAAB18")) +
+  labs(title="We're living longer",
+       subtitle = "Biggest life expectancy rise, 1967-2007")
+```
+
+```{r echo=FALSE}
+plot(grouped_bars)
+```
+
+### Faceted bar charts
+
+Using the same data from the stacked bar charts, you can see how the data could be displayed different through faceting.
+
+``` {r}
+facet_df <- stacked_df %>%
+  group_by(continent) %>%
+  mutate(Proportion = continentPop/sum(continentPop))
+
+facet_bars <- ggplot(data = facet_df, 
+                       aes(x = continent,
+                           y = Proportion)) +
+  geom_bar(stat = "identity", 
+           position = "identity") +
+  facet_wrap(~lifeExpGrouped)+
+  dluhc_style(size = 1) +
+  scale_y_continuous(labels = scales::percent) 
+
+facet_bars
+
+```
+
 ## Static LA Maps
 The package also allows you to create maps, currently only at LA level, using the LA_map function.
 

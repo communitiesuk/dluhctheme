@@ -2,6 +2,7 @@
 
 export(LA_map)
 export(dluhc_style)
+export(facet_barchart)
 export(facet_highlight_timeseries)
 export(finalise_plot)
 export(forecast_timeseries)
