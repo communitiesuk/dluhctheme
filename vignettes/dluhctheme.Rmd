@@ -1,15 +1,12 @@
 ---
-title: "DLUHC cookbook for R graphics"
-date: "Last updated: `r format(Sys.Date())`"
-output: 
-  github_document:
-    toc: true
-    toc_depth: 4
-    #toc_float: true
-    #theme: cosmo
+title: "dluhctheme"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{dluhctheme}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include=FALSE, echo=TRUE, warning=FALSE}
 pacman::p_load('dplyr', 'tidyr', 'gapminder',
@@ -543,3 +540,4 @@ HtB_map <- LA_map(.data = Help_to_Buy
 ``` {r echo=FALSE, fig.width = 7, fig.height = 7}
 HtB_map
 ```
+
