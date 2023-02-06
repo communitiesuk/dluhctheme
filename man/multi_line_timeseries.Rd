@@ -30,5 +30,6 @@ Create a time series with more than one line in a DLUHC style
 \examples{
 df <- dluhctheme::Social_Housing_Sales
 
-multi_line_timeseries(.data=df,datecol = year, ycol = count, groupcol = type, dateformat = "\%Y")
+library(tidyverse)
+dluhctheme::multi_line_timeseries(.data=df,datecol = year, ycol = count, groupcol = type, dateformat = "\%Y")
 }
