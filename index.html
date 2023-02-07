@@ -53,22 +53,15 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="dluhc-cookbook-for-r-graphics">DLUHC cookbook for R graphics<a class="anchor" aria-label="anchor" href="#dluhc-cookbook-for-r-graphics"></a>
+<div class="page-header"><h1 id="dluhc-style-for-r-graphics">DLUHC style for R graphics<a class="anchor" aria-label="anchor" href="#dluhc-style-for-r-graphics"></a>
 </h1></div>
 <p>Last updated: 2023-02-07</p>
-<ul>
-<li>
-<a href="#credit-to-bbc-data-team">Credit to BBC data team</a>
-<ul>
-<li><a href="#install-the-dluhctheme-package">Install the dluhctheme package</a></li>
-<li><a href="#how-does-the-dluctheme-package-work">How does the dluctheme package work?</a></li>
-</ul>
-</li>
-</ul>
-<!-- README.md is generated from README.Rmd. Please edit that file --><div class="section level2">
-<h2 id="credit-to-bbc-data-team">Credit to BBC data team<a class="anchor" aria-label="anchor" href="#credit-to-bbc-data-team"></a>
-</h2>
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+<div class="section level3">
+<h3 id="credit-to-bbc-data-team">Credit to BBC data team<a class="anchor" aria-label="anchor" href="#credit-to-bbc-data-team"></a>
+</h3>
 <p>This package has been copied from the much better BBC bbplot, and reapplied to work for creating graphics in a DLUHC style. Credit must go to the BBC data team for their fantastic product which the team at DLUHC have essentially copied for our own use.</p>
+</div>
 <div class="section level3">
 <h3 id="install-the-dluhctheme-package">Install the dluhctheme package<a class="anchor" aria-label="anchor" href="#install-the-dluhctheme-package"></a>
 </h3>
@@ -83,8 +76,12 @@
 <div class="section level3">
 <h3 id="how-does-the-dluctheme-package-work">How does the dluctheme package work?<a class="anchor" aria-label="anchor" href="#how-does-the-dluctheme-package-work"></a>
 </h3>
-<p>The package has two types of functions; Generic functions: <code><a href="reference/dluhc_style.html">dluhc_style()</a></code> and <code><a href="reference/finalise_plot.html">finalise_plot()</a></code> are functions which are designed to be generic themes which can be added to any ggplot2 object. They only edit the axes and the grid lines and define the text style, they do not set the colour of lines or fill on the graphs. Specific functions: The other functions are used as a quick tool for instantly creating a particular type of formatted graph based on a set shape of data inputted. These are less adaptable, but allow a user to create a graph in one line of code: <code><a href="reference/one_line_timeseries.html">one_line_timeseries()</a></code>, <code><a href="reference/multi_line_timeseries.html">multi_line_timeseries()</a></code>, <code><a href="reference/facet_highlight_timeseries.html">facet_highlight_timeseries()</a></code>, <code><a href="reference/LA_map.html">LA_map()</a></code>, <code><a href="reference/facet_barchart.html">facet_barchart()</a></code>, <code><a href="reference/forecast_timeseries.html">forecast_timeseries()</a></code> These functions allow you to create a data visualization in a set theme instantly but are more fixed in some of their formatting. Examples of these functions can all be found later in this document</p>
-</div>
+<p>The package has two types of functions;</p>
+<ul>
+<li><p>Generic functions: <code><a href="reference/dluhc_style.html">dluhc_style()</a></code> and <code><a href="reference/finalise_plot.html">finalise_plot()</a></code> are functions which are designed to be generic themes which can be added to any ggplot2 object. They only edit the axes and the grid lines and define the text style, they do not set the colour of lines or fill on the graphs.</p></li>
+<li><p>Specific functions: The other functions are used as a quick tool for instantly creating a particular type of formatted graph based on a set shape of data inputted. These are less adaptable, but allow a user to create a graph in one line of code: <code><a href="reference/one_line_timeseries.html">one_line_timeseries()</a></code>, <code><a href="reference/multi_line_timeseries.html">multi_line_timeseries()</a></code>, <code><a href="reference/facet_highlight_timeseries.html">facet_highlight_timeseries()</a></code>, <code><a href="reference/LA_map.html">LA_map()</a></code>, <code><a href="reference/facet_barchart.html">facet_barchart()</a></code>, <code><a href="reference/forecast_timeseries.html">forecast_timeseries()</a></code></p></li>
+</ul>
+<p>These functions allow you to create a data visualization in a set theme instantly but are more fixed in some of their formatting. Examples of these functions can all be found in the “Reference” tab at the top of this page</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
