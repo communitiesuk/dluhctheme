@@ -47,7 +47,7 @@
 <span>  <span class="va">variable</span>,</span>
 <span>  <span class="va">LA_col</span>,</span>
 <span>  map_colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#FFFFFF"</span>, <span class="st">"#012169"</span><span class="op">)</span>,</span>
-<span>  year <span class="op">=</span> <span class="fl">2022</span>,</span>
+<span>  year <span class="op">=</span> <span class="st">"2021-22"</span>,</span>
 <span>  countries <span class="op">=</span> <span class="st">"E"</span>,</span>
 <span>  save <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  filepath <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -98,19 +98,10 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">dluhctheme</span><span class="fu">::</span><span class="va">Help_to_Buy</span></span></span>
-<span class="r-in"><span><span class="fu">LA_map</span><span class="op">(</span><span class="va">df</span>,variable <span class="op">=</span> <span class="va">Completions</span>,LA_col <span class="op">=</span> <span class="va">LA_Code</span>,year <span class="op">=</span> <span class="st">"2020-21"</span>,countries <span class="op">=</span> <span class="st">"E"</span>,save <span class="op">=</span> <span class="cn">TRUE</span>, filepath <span class="op">=</span> <span class="st">"Help_to_Buy_map.png"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Attaching packages</span> ─────────────────────────────────────── tidyverse 1.3.2 ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2</span> 3.4.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr  </span> 1.0.1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble </span> 3.1.8     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr  </span> 1.1.0</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr  </span> 1.3.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr</span> 1.5.0</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr  </span> 2.1.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats</span> 1.0.0</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE</span>
+<span class="r-in"><span><span class="fu">LA_map</span><span class="op">(</span><span class="va">df</span>,variable <span class="op">=</span> <span class="va">Completions</span>,LA_col <span class="op">=</span> <span class="va">LA_Code</span>,year <span class="op">=</span> <span class="st">"2020-21"</span>,countries <span class="op">=</span> <span class="st">"E"</span>,save <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Your original data had 334 rows of data"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "On the map, there were 314 matches"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 6.67 x 6.67 in image</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "On the map, there were 314 matches, from 314 LAs on the map"</span>
+<span class="r-plt img"><img src="LA_map-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

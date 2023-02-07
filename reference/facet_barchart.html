@@ -47,11 +47,41 @@
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>textsize</dt>
-<dd></dd>
+    <dl><dt>.data</dt>
+<dd><p>A dataframe containing your data, ideally a 3 column dataframe with one value column and two categorical columns</p></dd>
+
+
+<dt>xcol</dt>
+<dd><p>The column which contains the variable to go on the x axis of the column chart</p></dd>
+
+
+<dt>ycol</dt>
+<dd><p>The column which contains the value to go on the y axis</p></dd>
+
+
+<dt>groupcol</dt>
+<dd><p>The column which contains the categorical variable which the graphs will be faceted by</p></dd>
+
+
+<dt>textsize</dt>
+<dd><p>The text size, initially set to 1, the size is a ratio to the normal dluhc_style size of 2</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
 
+<p>a ggplot object</p>
+    </div>
+
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">dluhctheme</span><span class="fu">::</span><span class="va">Net_Additions_Regional</span></span></span>
+<span class="r-in"><span><span class="va">df</span><span class="op">$</span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Year</span>,<span class="fl">7</span>,<span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">facet_barchart</span><span class="op">(</span><span class="va">df</span>,xcol <span class="op">=</span> <span class="va">year</span>,ycol <span class="op">=</span> <span class="va">Net_Additions</span>,groupcol<span class="op">=</span><span class="va">Region</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="facet_barchart-1.png" alt="" width="700" height="433"></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
