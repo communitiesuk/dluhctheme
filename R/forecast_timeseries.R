@@ -11,18 +11,17 @@
 #' @export
 #'
 #' @examples
-#' df <- dluhctheme::GDP_Prediction
-#' forecast_timeseries(df,year,ycol=GDP,cutdate = "31/03/2022",dateformat = "%d/%m/%Y", label_names = c("Actual","Predicted"))
+#' df <- dluhctheme::GDP_Deflator
+#' forecast_timeseries(df,year,ycol=GDP,cutdate = "01/04/2022",dateformat = "%d/%m/%Y", label_names = c("Actual","Predicted"))
 forecast_timeseries <- function(.data,datecol,ycol,cutdate,dateformat="%Y-%m-%d",dottedline=TRUE,label_names = c("Recorded","Forecast")){
-  library(tidyverse)
 
   is.convertible.to.date <- function(x) !is.na(as.Date(as.character(x), tz = 'UTC', format = dateformat))
 
-  if(any(is.convertible.to.date(pull(.data,{{datecol}}))==FALSE)){
+  if(any(is.convertible.to.date(dplyr::pull(.data,{{datecol}}))==FALSE)){
     stop("Date column not in format specified, or contains some NA values. Check the dateformat argument in the function")
   }
 
-  if(any(replace_na(is.numeric(pull(.data,{{ycol}})),TRUE)==FALSE)){
+  if(any(tidyr::replace_na(is.numeric(dplyr::pull(.data,{{ycol}})),TRUE)==FALSE)){
     stop("Value column contains non-numeric values. Check your data and try again")
   }
 
@@ -32,29 +31,29 @@ forecast_timeseries <- function(.data,datecol,ycol,cutdate,dateformat="%Y-%m-%d"
 
   cutdate = as.Date(cutdate,tryFormats = dateformat)
 
-.data <- .data %>%
-    mutate(Date = as.Date({{datecol}},tryFormats = dateformat)) %>%
-    mutate(value = {{ycol}}) %>%
-  mutate(prediction = ifelse(Date>=cutdate,label_names[2],label_names[1]))
+.data <- .data |>
+    dplyr::mutate(Date = as.Date({{datecol}},tryFormats = dateformat)) |>
+  dplyr::mutate(value = {{ycol}}) |>
+  dplyr::mutate(prediction = ifelse(Date>=cutdate,label_names[2],label_names[1]))
 
-duplicate <- .data %>%
-  mutate(check = ifelse(prediction!=lead(prediction),1,0)) %>%
-  filter(check == 1) %>%
-  mutate(prediction = label_names[2]) %>%
-  select(!check)
+duplicate <- .data |>
+  dplyr::mutate(check = ifelse(prediction!=dplyr::lead(prediction),1,0)) |>
+  dplyr::filter(check == 1) |>
+  dplyr::mutate(prediction = label_names[2]) |>
+  dplyr::select(!check)
 
 .data <- rbind(.data,duplicate)
 
 
-  a <- ggplot2::ggplot(data = .data,aes(x = Date,y = value)) +
-    geom_line(aes(linetype = factor(prediction,levels = c(label_names[1],label_names[2]))),size = 1.5, color = "#012169") +
+  a <- ggplot2::ggplot(data = .data,ggplot2::aes(x = Date,y = value)) +
+    ggplot2::geom_line(ggplot2::aes(linetype = factor(prediction,levels = c(label_names[1],label_names[2]))),size = 1.5, color = "#012169") +
     dluhctheme::dluhc_style() +
-    scale_linetype_manual(values = c("solid","dashed")) +
-    theme(legend.key.width = unit(2,"cm"))
+    ggplot2::scale_linetype_manual(values = c("solid","dashed")) +
+    ggplot2::theme(legend.key.width = unit(2,"cm"))
 
   if(dottedline){
     a <- a+
-      geom_vline(xintercept = cutdate,linetype="dotted",size=1)
+      ggplot2::geom_vline(xintercept = cutdate,linetype="dotted",size=1)
   }
   a
 }

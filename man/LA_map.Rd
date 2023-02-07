@@ -9,7 +9,7 @@ LA_map(
   variable,
   LA_col,
   map_colours = c("#FFFFFF", "#012169"),
-  year = 2022,
+  year = "2021-22",
   countries = "E",
   save = FALSE,
   filepath = NULL
@@ -40,5 +40,5 @@ Create a standard theme map from an sf object
 }
 \examples{
 df <- dluhctheme::Help_to_Buy
-LA_map(df,variable = Completions,LA_col = LA_Code,year = "2020-21",countries = "E",save = TRUE, filepath = "Help_to_Buy_map.png")
+LA_map(df,variable = Completions,LA_col = LA_Code,year = "2020-21",countries = "E",save = FALSE)
 }

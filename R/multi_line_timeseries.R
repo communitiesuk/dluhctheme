@@ -11,47 +11,47 @@
 #' @examples
 #' df <- dluhctheme::Social_Housing_Sales
 #'
-#' multi_line_timeseries(.data=df,datecol = year, ycol = count, groupcol = type, dateformat = "%Y")
+#' multi_line_timeseries(.data=df,datecol = year, ycol = count, groupcol = type, dateformat = "%d/%m/%Y")
 
 multi_line_timeseries <- function(.data,datecol,ycol,groupcol,dateformat = "%Y-%m-%d"){
-  library(tidyverse)
 
   is.convertible.to.date <- function(x) !is.na(as.Date(as.character(x), tz = 'UTC', format = dateformat))
 
-  if(any(is.convertible.to.date(pull(.data,{{datecol}}))==FALSE)){
+  if(any(is.convertible.to.date(dplyr::pull(.data,{{datecol}}))==FALSE)){
     stop("Date column not in format specified, or contains some NA values. Check the dateformat argument in the function")
     }
 
-  if(any(replace_na(is.numeric(pull(.data,{{ycol}})),TRUE)==FALSE)){
+  if(any(tidyr::replace_na(is.numeric(dplyr::pull(.data,{{ycol}})),TRUE)==FALSE)){
     stop("Value column contains non-numeric values. Check your data and try again")
   }
 
 
-  .data <- .data %>%
-    mutate(Date = as.Date(as.character({{datecol}}),tryFormats = dateformat)) %>%
-    mutate(value = {{ycol}}) %>%
-    mutate(variable = {{groupcol}})
+  .data <- .data |>
+    dplyr::mutate(Date = as.Date(as.character({{datecol}}),tryFormats = dateformat)) |>
+    dplyr::mutate(value = {{ycol}}) |>
+    dplyr::mutate(variable = {{groupcol}})
 
   variable_count <- length(unique(.data$variable))
 
 
-  graph <- .data %>%
-    ggplot(aes(x = Date,y = value)) +
-    geom_line(size = 1, aes(color = variable)) +
-    scale_y_continuous(expand = c(0,0)) +
+  graph <- .data |>
+    ggplot2::ggplot(ggplot2::aes(x = Date,y = value)) +
+    ggplot2::geom_line(size = 1, ggplot2::aes(color = variable)) +
+    ggplot2::scale_y_continuous(expand = c(0,0)) +
     dluhctheme::dluhc_style()
 
   if(variable_count == 2){
     graph <- graph +
-      scale_color_manual(values=c("#012169","#6b98fe"))
+      ggplot2::scale_color_manual(values=c("#012169","#6b98fe"))
   }else if(variable_count == 3){
     graph <- graph +
-      scale_color_manual(values=c("#012169","#6b98fe","orange"))
+      ggplot2::scale_color_manual(values=c("#012169","#6b98fe","orange"))
   }else if(variable_count == 4){
     graph <- graph +
-      scale_color_manual(values=c("#012169","#6b98fe","orange","green"))
+      ggplot2::scale_color_manual(values=c("#012169","#6b98fe","orange","green"))
   }else if(variable_count == 5){
-    scale_color_manual(values=c("#012169","#6b98fe","orange","green","black"))
+    graph <- graph +
+      ggplot2::scale_color_manual(values=c("#012169","#6b98fe","orange","green","black"))
   }else{
     stop("This function only allows for plotting up to 5 categories (lines) on one graph. If your grouping variable has more than 5 categories, it is suggested you use the facet_timeseries or facet_highlight_timeseries function")
   }

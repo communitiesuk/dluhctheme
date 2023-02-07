@@ -15,14 +15,11 @@
 #'
 #' @examples
 #' df <- dluhctheme::Help_to_Buy
-#' LA_map(df,variable = Completions,LA_col = LA_Code,year = "2020-21",countries = "E",save = TRUE, filepath = "Help_to_Buy_map.png")
-LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),year = 2022,countries = "E",save = FALSE,filepath = NULL){
-
-  library(tidyverse)
-  library(sf)
+#' LA_map(df,variable = Completions,LA_col = LA_Code,year = "2020-21",countries = "E",save = FALSE)
+LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),year = "2021-22",countries = "E",save = FALSE,filepath = NULL){
 
 
-  if(countries %in% c("E","E+W","GB","UK")==FALSE){
+    if(countries %in% c("E","E+W","GB","UK")==FALSE){
     stop("The country variable you supplied is invalid. It must be one of:
          E, E+W, GB, UK. These represent England, England and Wales, Great Britain and United Kingdom respectively")
   }
@@ -52,27 +49,22 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
     stop("The year you have selected is outside the range of maps available. Please contact the package owner to update the maps available")
   }
 
-  rawdata_LA_Col <- .data %>%
-  pull({{LA_col}})
+  rawdata_LA_Col <- .data |>
+  dplyr::pull({{LA_col}})
 
   correct_LA_codes <- codes_match$codes[which(codes_match$country == countries)]
 
-  if(any(str_detect(rawdata_LA_Col,correct_LA_codes))==FALSE){
+  if(any(stringr::str_detect(rawdata_LA_Col,correct_LA_codes))==FALSE){
     stop("The data you have provided does not have the local authority codes in the correct format for the countries you have selected")
   }
 
-  library(cowplot)
 
   if(year=="2020-21"){
-    data("LAD_Dec2020_BUC")
-    LA_map_data <- LAD_Dec2020_BUC
+    LA_map_data <- sf::st_as_sf(dluhctheme::LAD_Dec2020_BUC)
   }else if(year == "2021-22"){
-    data("LAD_May2021_BUC")
-    LA_map_data <- LAD_May2021_BUC
-
+    LA_map_data <- sf::st_as_sf(dluhctheme::LAD_May2021_BUC)
   }else{
-    data("LAD_Dec2022_BUC")
-    LA_map_data <- LAD_Dec2022_BUC
+     LA_map_data <- sf::st_as_sf(dluhctheme::LAD_Dec2022_BUC)
   }
 
 
@@ -80,36 +72,37 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
 
   LA_map_colname <- map_match$LA_Column[which(map_match$year==year)]
 
-  LA_map_data <- LA_map_data %>%
-    rename("LA_Code"=all_of(LA_map_colname)) %>%
-    filter(str_detect(LA_Code,codes_match$codes[which(codes_match$country==countries)]))
+  LA_map_data <- LA_map_data |>
+    dplyr::rename("LA_Code"=all_of(LA_map_colname)) |>
+    dplyr::filter(stringr::str_detect(LA_Code,codes_match$codes[which(codes_match$country==countries)]))
 
   original_rows <- nrow(.data)
 
-  .data  <- .data %>%
-    mutate(LA_Code = {{LA_col}}) %>%
-    left_join(LA_map_data,., by = c("LA_Code"))
+  sfdata  <- .data |>
+    dplyr::mutate(LA_Code = {{LA_col}}) |>
+    dplyr::left_join(LA_map_data,., by = c("LA_Code")) |>
+    sf::st_as_sf()
 
-  matched_rows <- nrow(inner_join(.data,as.data.frame(LA_map_data),by=c("LA_Code")))
+  matched_rows <- nrow(dplyr::inner_join(.data,as.data.frame(LA_map_data),by=c("LA_Code")))
 
   print(paste0("Your original data had ",original_rows," rows of data"))
-  print(paste0("On the map, there were ",matched_rows," matches"))
+  print(paste0("On the map, there were ",matched_rows," matches, from ",nrow(LA_map_data)," LAs on the map"))
   map <-
-    ggplot(.data) +
-    geom_sf(aes(fill = {{variable}}),colour = "black",size=0.02) +
-    theme_void() +
-    scale_fill_gradient(labels = scales::comma,low = map_colours[1],high = map_colours[2]) +
-    theme(
-      plot.title=element_blank(),
+    ggplot2::ggplot(sfdata) +
+    ggplot2::geom_sf(ggplot2::aes(fill = {{variable}}),colour = "black",linewidth=0.02) +
+    ggplot2::theme_void() +
+    ggplot2::scale_fill_gradient(labels = scales::comma,low = map_colours[1],high = map_colours[2]) +
+    ggplot2::theme(
+      plot.title=ggplot2::element_blank(),
       legend.position = c(codes_match$legendx[which(codes_match$country==countries)],
                           codes_match$legendy[which(codes_match$country==countries)]),
-      legend.title = element_text(color = "black", face = "bold", vjust = 0.8),
-      plot.margin = margin(10, 0, 10, 0)) #add space around the plot
+      legend.title = ggplot2::element_text(color = "black", face = "bold", vjust = 0.8),
+      plot.margin = ggplot2::margin(10, 0, 10, 0)) #add space around the plot
 
 
-  map_London <- .data %>%
-    mutate(Code_temp = substr(LA_Code, 1,3))%>%
-    filter(Code_temp == "E09")
+  map_London <- sfdata |>
+    dplyr::mutate(Code_temp = substr(LA_Code, 1,3))|>
+    dplyr::filter(Code_temp == "E09")
 
   limits = sf::st_bbox(map_London)
   limits_adj <- limits
@@ -122,24 +115,24 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
 
   map <- map +
 
-    geom_rect( xmin = limits_adj[[1]],
+    ggplot2::geom_rect( xmin = limits_adj[[1]],
                ymin = limits_adj[[2]],
                xmax = limits_adj[[3]],
                ymax = limits_adj[[4]],
                fill=NA,
                colour = "black",
-               size = 0.8)
+               linewidth = 0.8)
 
-  finalmap <- map %>%
+  finalmap <- map |>
     cowplot::ggdraw() +
-    draw_plot(
+    cowplot::draw_plot(
       {
         map +
-          coord_sf(   xlim = limits_adj[c(1,3)],
+          ggplot2::coord_sf(   xlim = limits_adj[c(1,3)],
                       ylim = limits_adj[c(2,4)],
                       expand = FALSE) +
-          theme(legend.position = "none",
-                plot.title = element_blank())
+          ggplot2::theme(legend.position = "none",
+                plot.title = ggplot2::element_blank())
       },
       x=codes_match$x_adjust[which(codes_match$country==countries)],
       y=codes_match$y_adjust[which(codes_match$country==countries)],
@@ -148,7 +141,7 @@ LA_map <- function(.data,variable,LA_col,map_colours = c("#FFFFFF","#012169"),ye
     )
 
   if(save){
-    ggsave(finalmap,filename = filepath)
+    ggplot2::ggsave(finalmap,filename = filepath)
   }else{
       return(finalmap)
     }

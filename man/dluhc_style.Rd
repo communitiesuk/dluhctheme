@@ -16,7 +16,11 @@ a ggplot object
 ggplot function to create standard background and axis labels for a DLUHC style graph
 }
 \examples{
-df <- dluhctheme::Net_Additions
-ggplot(df, aes(x = year, y=lifeExp))
-+ dluhc_style()
+df <- dluhctheme::Net_Additions_Regional
+df$year <- as.numeric(substr(df$Year,7,10))
+df <- dplyr::filter(df,Region \%in\% c("North East","North West","South East"))
+a <- ggplot2::ggplot(df, ggplot2::aes(x = year, y=Net_Additions)) +
+ggplot2::geom_line(ggplot2::aes(colour = Region),linewidth = 2)
+a
+a + dluhc_style()
 }
