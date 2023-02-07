@@ -1,16 +1,10 @@
-DLUHC cookbook for R graphics
+DLUHC style for R graphics
 ================
 Last updated: 2023-02-07
 
--   [Credit to BBC data team](#credit-to-bbc-data-team)
-    -   [Install the dluhctheme
-        package](#install-the-dluhctheme-package)
-    -   [How does the dluctheme package
-        work?](#how-does-the-dluctheme-package-work)
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## Credit to BBC data team
+### Credit to BBC data team
 
 This package has been copied from the much better BBC bbplot, and
 reapplied to work for creating graphics in a DLUHC style. Credit must go
@@ -40,17 +34,22 @@ are good to go and create charts.
 
 ### How does the dluctheme package work?
 
-The package has two types of functions; Generic functions:
-`dluhc_style()` and `finalise_plot()` are functions which are designed
-to be generic themes which can be added to any ggplot2 object. They only
-edit the axes and the grid lines and define the text style, they do not
-set the colour of lines or fill on the graphs. Specific functions: The
-other functions are used as a quick tool for instantly creating a
-particular type of formatted graph based on a set shape of data
-inputted. These are less adaptable, but allow a user to create a graph
-in one line of code: `one_line_timeseries()`, `multi_line_timeseries()`,
-`facet_highlight_timeseries()`, `LA_map()`, `facet_barchart()`,
-`forecast_timeseries()` These functions allow you to create a data
-visualization in a set theme instantly but are more fixed in some of
-their formatting. Examples of these functions can all be found later in
-this document
+The package has two types of functions;
+
+-   Generic functions: `dluhc_style()` and `finalise_plot()` are
+    functions which are designed to be generic themes which can be added
+    to any ggplot2 object. They only edit the axes and the grid lines
+    and define the text style, they do not set the colour of lines or
+    fill on the graphs.
+
+-   Specific functions: The other functions are used as a quick tool for
+    instantly creating a particular type of formatted graph based on a
+    set shape of data inputted. These are less adaptable, but allow a
+    user to create a graph in one line of code: `one_line_timeseries()`,
+    `multi_line_timeseries()`, `facet_highlight_timeseries()`,
+    `LA_map()`, `facet_barchart()`, `forecast_timeseries()`
+
+These functions allow you to create a data visualization in a set theme
+instantly but are more fixed in some of their formatting. Examples of
+these functions can all be found in the “Reference” tab at the top of
+this page

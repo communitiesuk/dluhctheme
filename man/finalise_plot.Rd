@@ -12,7 +12,8 @@ finalise_plot(
   height_pixels = 450,
   logo_image_path = file.path(system.file("data", package = "dluhctheme"),
     "DLUHC_Logo.png"),
-  footerfontsize = 18
+  footerfontsize = 18,
+  save = TRUE
 )
 }
 \arguments{
@@ -39,13 +40,17 @@ Running this function will save your plot with the correct guidelines for public
 It will left align your source, add the DLUHC logo at the bottom right and save it to your specified location.
 }
 \examples{
+df <- data.frame(replicate(2,sample(0:20,100,rep=TRUE)))
+myplot <- ggplot2::ggplot(data = df,ggplot2::aes(x = X1,y=X2)) +
+ggplot2::geom_point() +
+dluhctheme::dluhc_style()
 finalise_plot(plot_name = myplot,
-source = "The source for my data",
+source = "Source: The source for my data",
 save_filepath = "filename_that_my_plot_should_be_saved_to-nc.png",
 width_pixels = 640,
 height_pixels = 450,
-logo_image_path = "logo_image_filepath.png"
-footerfontsize = 18
+footerfontsize = 18,
+save = TRUE
 )
 
 }

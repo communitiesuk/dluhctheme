@@ -1,28 +1,3 @@
-save_plot <- function (plot_grid, width, height, save_filepath) {
-  grid::grid.draw(plot_grid)
-  #save it
-  ggplot2::ggsave(filename = save_filepath,
-                  plot=plot_grid, width=(width/72), height=(height/72),  bg="white")
-}
-
-#Left align text
-left_align <- function(plot_name, pieces){
-  grob <- ggplot2::ggplotGrob(plot_name)
-  n <- length(pieces)
-  grob$layout$l[grob$layout$name %in% pieces] <- 2
-  return(grob)
-}
-
-create_footer <- function (source_name, logo_image_path,footerfontsize = 18) {
-  #Make the footer
-  footer <- grid::grobTree(grid::linesGrob(x = grid::unit(c(0, 1), "npc"), y = grid::unit(1.1, "npc")),
-                           grid::textGrob(source_name,
-                                          x = 0.004, hjust = 0, gp = grid::gpar(fontsize=footerfontsize)),
-                           grid::rasterGrob(png::readPNG(logo_image_path), x = 0.904))
-  return(footer)
-
-}
-
 #' Arrange alignment and save DLUHC ggplot chart
 #'
 #' Running this function will save your plot with the correct guidelines for publication for a BBC News graphic.
@@ -38,23 +13,52 @@ create_footer <- function (source_name, logo_image_path,footerfontsize = 18) {
 #' @return (Invisibly) an updated ggplot object.
 #' @keywords finalise_plot
 #' @examples
+#' df <- data.frame(replicate(2,sample(0:20,100,rep=TRUE)))
+#' myplot <- ggplot2::ggplot(data = df,ggplot2::aes(x = X1,y=X2)) +
+#' ggplot2::geom_point() +
+#' dluhctheme::dluhc_style()
 #' finalise_plot(plot_name = myplot,
-#' source = "The source for my data",
+#' source = "Source: The source for my data",
 #' save_filepath = "filename_that_my_plot_should_be_saved_to-nc.png",
 #' width_pixels = 640,
 #' height_pixels = 450,
-#' logo_image_path = "logo_image_filepath.png"
-#' footerfontsize = 18
+#' footerfontsize = 18,
+#' save = TRUE
 #' )
 #'
-#' @export
 finalise_plot <- function(plot_name,
                           source_name,
                           save_filepath=file.path(Sys.getenv("TMPDIR"), "tmp-nc.png"),
                           width_pixels=640,
                           height_pixels=450,
                           logo_image_path = file.path(system.file("data", package = 'dluhctheme'),"DLUHC_Logo.png"),
-                          footerfontsize = 18) {
+                          footerfontsize = 18,
+                          save = TRUE) {
+
+  save_plot <- function (plot_grid, width, height, save_filepath) {
+    grid::grid.draw(plot_grid)
+    #save it
+    ggplot2::ggsave(filename = save_filepath,
+                    plot=plot_grid, width=(width/72), height=(height/72),  bg="white")
+  }
+
+  #Left align text
+  left_align <- function(plot_name, pieces){
+    grob <- ggplot2::ggplotGrob(plot_name)
+    n <- length(pieces)
+    grob$layout$l[grob$layout$name %in% pieces] <- 2
+    return(grob)
+  }
+
+  create_footer <- function (source_name, logo_image_path,footerfontsize = 18) {
+    #Make the footer
+    footer <- grid::grobTree(grid::linesGrob(x = grid::unit(c(0, 1), "npc"), y = grid::unit(1.1, "npc")),
+                             grid::textGrob(source_name,
+                                            x = 0.004, hjust = 0, gp = grid::gpar(fontsize=footerfontsize)),
+                             grid::rasterGrob(png::readPNG(logo_image_path), x = 0.89))
+    return(footer)
+
+  }
 
   footer <- create_footer(source_name, logo_image_path, footerfontsize)
 
@@ -63,9 +67,9 @@ finalise_plot <- function(plot_name,
   plot_grid <- ggpubr::ggarrange(plot_left_aligned, footer,
                                  ncol = 1, nrow = 2,
                                  heights = c(1, 0.1/(height_pixels/450)))
+  plot_grid
   ## print(paste("Saving to", save_filepath))
-  save_plot(plot_grid, width_pixels, height_pixels, save_filepath)
+  if(save==TRUE){save_plot(plot_grid, width_pixels, height_pixels, save_filepath)}
   ## Return (invisibly) a copy of the graph. Can be assigned to a
   ## variable or silently ignored.
-  invisible(plot_grid)
 }
