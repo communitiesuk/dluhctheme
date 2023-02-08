@@ -37,7 +37,7 @@ We'll get to how you can put together the various elements of these graphics, bu
 ### Load all the libraries you need
 A few of the steps in this cookbook - and to create charts in R in general - require certain packages to be installed and loaded. So that you do not have to install and load them one by one, you can use the `p_load` function in the `pacman` package to load them all at once with the following code. 
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 #This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
 if(!require(pacman))install.packages("pacman")
 
@@ -45,7 +45,7 @@ pacman::p_load('dplyr', 'tidyr', 'gapminder',
                'ggplot2',  'ggalt', 'cowplot', 'sf',
                'forcats', 'R.utils', 'png', 
                'grid', 'ggpubr', 'scales',
-               'dluhctheme')
+               'dluhctheme', 'knitr')
 ```
 
 ### Install the dluhctheme package
@@ -82,7 +82,7 @@ The code below shows how the `dluhc_style()` should be used within standard char
 ```{r message = FALSE, warning = FALSE}
 #Data for chart from 2021 Social Housing Sales statistical release is contained within the dluhctheme package
 
-kable(head(Social_Housing_Sales))
+knitr::kable(head(Social_Housing_Sales))
 
 #The date column is not in the proper R format, so needs to be converted using the function below
 line_df <- Social_Housing_Sales %>%
@@ -268,7 +268,7 @@ This function sets up to five different colours for a line chart. If you want to
 Faceting is a method used to separate categorical variables and plot on multiple separate graphs. The data contained within the `Net_Additions_Regional` dataset creates one time series for each of the nine regions in England. Below shows it plotted on one graph:
 
 ``` {r warning=FALSE,message=FALSE}
-kable(head(Net_Additions_Regional))
+knitr::kable(head(Net_Additions_Regional))
 ```
 
 To plot on a graph, the date column needs to be cleaned:
@@ -330,7 +330,7 @@ Sometimes you may want to present data on a graph of which some of the data is r
 
 The example dataset for this is the `GDP_Deflator` data contained in the dluhctheme package
 ```{r}
-kable(GDP_Deflator)
+knitr::kable(GDP_Deflator)
 ```
 
 All the data up to 31/03/2022 is recorded data, and all afterwards is preidiction
@@ -357,7 +357,7 @@ Forecast_df_2 <- Forecast_df %>%
   add_row(year = "31/03/2022",date = as.Date("2022-03-31"),GDP=100,type = "Predicted") %>%
   arrange(date)
 
-kable(Forecast_df_2)
+knitr::kable(Forecast_df_2)
 ```
 
 ```{r}
@@ -519,7 +519,7 @@ To create the map your data must have a column for the LA codes in the proper ON
 The example data for this is the number of help to buy sales in each local authority
 
 ```{r}
-kable(head(Help_to_Buy))
+knitr::kable(head(Help_to_Buy))
 ```
 
 You need to specify a few things for this function: 

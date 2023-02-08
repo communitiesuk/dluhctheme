@@ -1,6 +1,6 @@
 DLUHC style for R graphics
 ================
-Last updated: 2023-02-07
+Last updated: 2023-02-08
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 

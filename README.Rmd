@@ -8,6 +8,9 @@ output:
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include=FALSE, echo=TRUE, warning=FALSE}
+#This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
+if(!require(pacman))install.packages("pacman")
+
 pacman::p_load('dplyr', 'tidyr', 'gapminder',
                'ggplot2',  'ggalt',
                'forcats', 'R.utils', 'png', 
