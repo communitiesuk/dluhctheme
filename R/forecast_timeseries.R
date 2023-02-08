@@ -49,7 +49,7 @@ duplicate <- .data |>
     ggplot2::geom_line(ggplot2::aes(linetype = factor(prediction,levels = c(label_names[1],label_names[2]))),size = 1.5, color = "#012169") +
     dluhctheme::dluhc_style() +
     ggplot2::scale_linetype_manual(values = c("solid","dashed")) +
-    ggplot2::theme(legend.key.width = unit(2,"cm"))
+    ggplot2::theme(legend.key.width = ggplot2::unit(2,"cm"))
 
   if(dottedline){
     a <- a+

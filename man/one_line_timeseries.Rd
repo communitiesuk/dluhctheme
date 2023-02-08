@@ -22,7 +22,8 @@ a ggplot object
 Create a single line time series graph in a dluhc theme
 }
 \examples{
-df <- dluhctheme::Net_Additions
+df <- dluhctheme::Social_Housing_Sales
+df <- dplyr::filter(df,type == "Right to Buy")
 
-one_line_timeseries(.data=df,datecol = year, ycol = lifeExp, dateformat = "\%Y")
+one_line_timeseries(.data=df,datecol = year, ycol = count, dateformat = "\%d/\%m/\%Y")
 }

@@ -9,9 +9,10 @@
 #' @export
 #'
 #' @examples
-#' df <- dluhctheme::Net_Additions
+#' df <- dluhctheme::Social_Housing_Sales
+#' df <- dplyr::filter(df,type == "Right to Buy")
 #'
-#' one_line_timeseries(.data=df,datecol = year, ycol = lifeExp, dateformat = "%Y")
+#' one_line_timeseries(.data=df,datecol = year, ycol = count, dateformat = "%d/%m/%Y")
 
 one_line_timeseries <- function(.data,datecol,ycol,dateformat="%Y-%m-%d"){
   library(tidyverse)
