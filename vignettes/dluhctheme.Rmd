@@ -18,11 +18,19 @@ knitr::opts_chunk$set(
 
 ```{r setup, include=FALSE, echo=TRUE, warning=FALSE}
 library(dluhctheme)
-pacman::p_load('dplyr', 'tidyr', 'gapminder',
-               'ggplot2',  'ggalt',
-               'forcats', 'R.utils', 'png', 
-               'grid', 'ggpubr', 'scales',
-               'dluhctheme', 'knitr', 'pander')
+library(dplyr)
+library(tidyr)
+library(gapminder)
+library(ggplot2)
+library(ggalt)
+library(forcats)
+library(R.utils)
+library(png)
+library(grid)
+library(ggpubr)
+library(pander)
+library(scales)
+library(knitr)
 
 options(scipen = 999)
 ```

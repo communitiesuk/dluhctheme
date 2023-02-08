@@ -13,10 +13,12 @@
 #' @return (Invisibly) an updated ggplot object.
 #' @keywords finalise_plot
 #' @examples
-#' df <- data.frame(replicate(2,sample(0:20,100,rep=TRUE)))
+#' df <- data.frame(replicate(2,sample(1:20,100,rep=TRUE)))
 #' myplot <- ggplot2::ggplot(data = df,ggplot2::aes(x = X1,y=X2)) +
 #' ggplot2::geom_point() +
-#' dluhctheme::dluhc_style()
+#' dluhctheme::dluhc_style() +
+#' ggplot2::scale_y_continuous(expand=c(0,0))
+#'
 #' finalise_plot(plot_name = myplot,
 #' source = "Source: The source for my data",
 #' save_filepath = "filename_that_my_plot_should_be_saved_to-nc.png",
