@@ -302,6 +302,11 @@ The facet_wrap function is made of 2 parts, the first is to separate which varia
 
 ### dluhctheme function
 There is also a standard function built into the `dluhctheme` package which allows you to create a highlighted faceted graph in one step, like the previous functions
+```{r warning=FALSE, message=FALSE,echo=FALSE}
+#This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
+if(!require(gghighlight))install.packages("gghighlight")
+
+```
 
 ```{r warning=FALSE,message=FALSE}
 facet_graph <- facet_highlight_timeseries(.data = Net_Additions_Regional,
