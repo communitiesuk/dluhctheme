@@ -335,7 +335,7 @@ Sometimes you may want to present data on a graph of which some of the data is r
 
 The example dataset for this is the `OBR_Forecast` data contained in the dluhctheme package
 ```{r}
-knitr::kable(OBR_Forecast)
+knitr::kable(head(OBR_Forecast))
 ```
 
 All the data up to 30/09/2022 is recorded data, and all afterwards is prediction
@@ -362,7 +362,7 @@ Forecast_df_2 <- Forecast_df %>%
   add_row(Date = "30/09/2022",date = as.Date("2022-09-30"),Inflation=9.7,type = "Predicted") %>%
   arrange(date)
 
-knitr::kable(Forecast_df_2)
+knitr::kable(head(Forecast_df_2))
 ```
 
 ```{r}
@@ -516,10 +516,24 @@ facet_bars
 
 ```
 
+### dluhctheme function
+Again there is a function for directly creating faceted bar charts straight from the data.
+Using the `Net_Additions_Regional` data, as in the faceted line graph example
+
+```{r}
+facet_df <- dluhctheme::Net_Additions_Regional %>%
+  filter(Region %in% c("North East","North West","East Midlands","South East","South West","London")) %>%
+  mutate(year = as.Date(Year,tryFormats="%d/%m/%Y"))
+facet_barchart(.data = facet_df ,
+               xcol = year,
+               ycol=Net_Additions,
+               groupcol = Region
+               )
+```
 ## Static LA Maps
 The package also allows you to create maps, currently only at LA level, using the LA_map function.
 
-To create the map your data must have a column for the LA codes in the proper ONS format, not that mad loopy format that LPA use!
+To create the map your data must have a column for the LA codes in the proper ONS format.
 
 The example data for this is the number of help to buy sales in each local authority
 
