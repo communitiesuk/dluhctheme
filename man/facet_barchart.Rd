@@ -25,7 +25,7 @@ Title
 }
 \examples{
 df <- dluhctheme::Net_Additions_Regional
-df <- dplyr::filter(df,Regions \%in\% c("North East","North West","South East","South West","London", "East Midlands"))
+df <- dplyr::filter(df,Region \%in\% c("North East","North West","South East","South West","London", "East Midlands"))
 df$year <- substr(df$Year,7,10)
 facet_barchart(df,xcol = year,ycol = Net_Additions,groupcol=Region)
 }
