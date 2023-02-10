@@ -11,6 +11,7 @@
 #'
 #' @examples
 #' df <- dluhctheme::Net_Additions_Regional
+#' df <- dplyr::filter(df,Regions %in% c("North East","North West","South East","South West","London", "East Midlands"))
 #' df$year <- substr(df$Year,7,10)
 #' facet_barchart(df,xcol = year,ycol = Net_Additions,groupcol=Region)
 facet_barchart <- function(.data,xcol,ycol,groupcol,textsize=1){
@@ -21,6 +22,6 @@ ggplot2::ggplot(data = .data,ggplot2::aes(x={{xcol}},y={{ycol}},fill=variable)) 
   ggplot2::facet_wrap(~factor(variable), scales='fixed',strip.position="top") +
   dluhctheme::dluhc_style(size = textsize) +
   ggplot2::theme(legend.position = "none") +
-  ggplot2::scale_fill_manual(values= c("#012169","blue","orange","purple","black","red","green","black","blue"))
+  ggplot2::scale_fill_manual(values= c("#012169","#7B2876","#C5406E","#F4745D","#FFB454","#F9F871"))
 }
 
