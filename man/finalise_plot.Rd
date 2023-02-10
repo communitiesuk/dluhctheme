@@ -36,7 +36,6 @@ which needs to be a PNG file - defaults to DLUHC image that sits within the data
 (Invisibly) an updated ggplot object.
 }
 \description{
-Running this function will save your plot with the correct guidelines for publication for a BBC News graphic.
 It will left align your source, add the DLUHC logo at the bottom right and save it to your specified location.
 }
 \examples{
@@ -56,4 +55,3 @@ save = TRUE
 )
 
 }
-\keyword{finalise_plot}

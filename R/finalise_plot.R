@@ -1,6 +1,5 @@
 #' Arrange alignment and save DLUHC ggplot chart
 #'
-#' Running this function will save your plot with the correct guidelines for publication for a BBC News graphic.
 #' It will left align your source, add the DLUHC logo at the bottom right and save it to your specified location.
 #' @param plot_name The variable name of the plot you have created that you want to format and save
 #' @param source_name The text you want to come after the text 'Source:' in the bottom left hand side of your side
@@ -11,7 +10,6 @@
 #'  which needs to be a PNG file - defaults to DLUHC image that sits within the data folder of your package
 #' @param footerfontsize Size of the font used in the footer
 #' @return (Invisibly) an updated ggplot object.
-#' @keywords finalise_plot
 #' @examples
 #' df <- data.frame(replicate(2,sample(1:19,100,rep=TRUE)))
 #' myplot <- ggplot2::ggplot(data = df,ggplot2::aes(x = X1,y=X2)) +
