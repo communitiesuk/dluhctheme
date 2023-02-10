@@ -250,16 +250,21 @@ The “DLUHC colours” for a multi-line time series are contained within a func
 
 ### dluhctheme function
 ```{r warning = FALSE, message = FALSE}
-multi_line_timeseries(.data = Social_Housing_Sales,
-                      datecol = year, 
-                      ycol = count, 
-                      groupcol = type, 
+kable(head(dluhctheme::Net_Additions_Regional))
+
+multi_line_df <- dluhctheme::Net_Additions_Regional %>%
+  filter(Region %in% c("North East","North West","East Midlands","South East"))
+
+multi_line_timeseries(.data = multi_line_df,
+                      datecol = Year, 
+                      ycol = Net_Additions, 
+                      groupcol = Region, 
                       dateformat = "%d/%m/%Y")
 ```
 
 This function works identically to the one_line_timeseries function with the addition of the `groupcol` variable which is the variable to denote how the data is split. 
 
-To use this function, your data must be in the same format as the `Social_Housing_Sales` dataset, with one column for the date, one for the numeric value and one for the category variable.
+To use this function, your data must be in the same format as the `Social_Housing_Sales` data-set, with one column for the date, one for the numeric value and one for the category variable.
 
 This function sets up to five different colours for a line chart. If you want to use more than 5 colours, it is suggested that you break the graphs up into separate facets and use a function like the one below:
 
