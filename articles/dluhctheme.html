@@ -99,40 +99,12 @@ them all at once with the following code.</p>
 <code class="sourceCode R"><span><span class="co">#This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trinker/pacman" class="external-link">pacman</a></span><span class="op">)</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pacman"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: pacman</span></span>
-<span><span class="co">#&gt; Warning in library(package, lib.loc = lib.loc, character.only = TRUE,</span></span>
-<span><span class="co">#&gt; logical.return = TRUE, : there is no package called 'pacman'</span></span>
-<span><span class="co">#&gt; Installing package into '/home/runner/work/_temp/Library'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
-<span><span class="co">#&gt; also installing the dependency 'remotes'</span></span>
 <span></span>
 <span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html" class="external-link">p_load</a></span><span class="op">(</span><span class="st">'dplyr'</span>, <span class="st">'tidyr'</span>, <span class="st">'gapminder'</span>,</span>
 <span>               <span class="st">'ggplot2'</span>,  <span class="st">'ggalt'</span>, <span class="st">'cowplot'</span>, <span class="st">'sf'</span>,</span>
 <span>               <span class="st">'forcats'</span>, <span class="st">'R.utils'</span>, <span class="st">'png'</span>, </span>
 <span>               <span class="st">'grid'</span>, <span class="st">'ggpubr'</span>, <span class="st">'scales'</span>,</span>
-<span>               <span class="st">'dluhctheme'</span>, <span class="st">'knitr'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Installing package into '/home/runner/work/_temp/Library'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; gapminder installed</span></span>
-<span><span class="co">#&gt; Installing package into '/home/runner/work/_temp/Library'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
-<span><span class="co">#&gt; also installing the dependencies 'later', 'extrafontdb', 'Rttf2pt1', 'htmlwidgets', 'lazyeval', 'crosstalk', 'promises', 'proj4', 'ash', 'maps', 'extrafont', 'plotly'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ggalt installed</span></span>
-<span><span class="co">#&gt; Installing package into '/home/runner/work/_temp/Library'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
-<span><span class="co">#&gt; also installing the dependencies 'R.oo', 'R.methodsS3'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; R.utils installed</span></span>
-<span><span class="co">#&gt; Installing package into '/home/runner/work/_temp/Library'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; png installed</span></span>
-<span><span class="co">#&gt; Installing package into '/home/runner/work/_temp/Library'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
-<span><span class="co">#&gt; also installing the dependencies 'diffobj', 'pkgload', 'praise', 'waldo', 'testthat', 'numDeriv', 'SparseM', 'MatrixModels', 'minqa', 'nloptr', 'RcppEigen', 'carData', 'abind', 'pbkrtest', 'quantreg', 'lme4', 'corrplot', 'car', 'ggrepel', 'ggsci', 'ggsignif', 'gridExtra', 'polynom', 'rstatix'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ggpubr installed</span></span></code></pre></div>
+<span>               <span class="st">'dluhctheme'</span>, <span class="st">'knitr'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="install-the-dluhctheme-package">Install the dluhctheme package<a class="anchor" aria-label="anchor" href="#install-the-dluhctheme-package"></a>
@@ -272,7 +244,7 @@ and colour of the title element of the plot.</p>
 <span><span class="co">#&gt;         strip.text = ggplot2::element_text(size = size * 11, </span></span>
 <span><span class="co">#&gt;             hjust = 0))</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55d2690f89d0&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x558f45787358&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:dluhctheme&gt;</span></span></code></pre>
 <p>You can modify these settings for your chart, or add additional theme
 arguments, by calling the <code>theme</code> function with the arguments
