@@ -48,7 +48,7 @@ multi_line_timeseries <- function(.data,datecol,ycol,groupcol,dateformat = "%Y-%
       ggplot2::scale_color_manual(values=c("#012169","#C5406E","#FFB454"))
   }else if(variable_count == 4){
     graph <- graph +
-      ggplot2::scale_color_manual(values=c("#012169","#C5406E","#F4745D","#F9F871"))
+      ggplot2::scale_color_manual(values=c("#012169","#C5406E","#F4745D","#FFB454"))
   }else if(variable_count == 5){
     graph <- graph +
       ggplot2::scale_color_manual(values=c("#012169","#7B2876","#C5406E","#F4745D","#FFB454"))
