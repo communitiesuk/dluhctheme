@@ -45,7 +45,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">facet_barchart</span><span class="op">(</span><span class="va">.data</span>, <span class="va">xcol</span>, <span class="va">ycol</span>, <span class="va">groupcol</span>, textsize <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">facet_barchart</span><span class="op">(</span><span class="va">.data</span>, <span class="va">xcol</span>, <span class="va">ycol</span>, <span class="va">groupcol</span>, textsize <span class="op">=</span> <span class="fl">1</span>, diffcolours <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,6 +68,10 @@
 
 <dt>textsize</dt>
 <dd><p>The text size, initially set to 1, the size is a ratio to the normal dluhc_style size of 2</p></dd>
+
+
+<dt>diffcolours</dt>
+<dd><p>A TRUE/FALSE variable which determines if you want each of the charts to have the same colour, or for each graph to have one of the six colours from the DLUHC theme. If you want neither of these options, this can be overridden with the scale_fill_manual() ggplot function.</p></dd>
 
 </dl></div>
     <div class="section level2">
