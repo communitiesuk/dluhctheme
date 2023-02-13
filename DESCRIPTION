@@ -20,7 +20,7 @@ Depends:
     R (>= 2.10)
 URL: https://communitiesuk.github.io/dluhctheme/
 Suggests: 
-    tidyverse
+    tidyverse,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
