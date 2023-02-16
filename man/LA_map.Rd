@@ -7,7 +7,11 @@
 LA_map(
   .data,
   variable,
+  legendtitle = NULL,
   LA_col,
+  title = NULL,
+  subtitle = NULL,
+  titlesize = 1,
   map_colours = c("#FFFFFF", "#012169"),
   year = "2021-22",
   countries = "E",
@@ -20,7 +24,15 @@ LA_map(
 
 \item{variable}{The column in the .data which has the numeric value to be mapped}
 
+\item{legendtitle}{The text to appear as the title for the legend on the map, set to NULL unless specified}
+
 \item{LA_col}{The column which contains the Local Authority code}
+
+\item{title}{The map title, in black bold font. Set to NULL unless specified}
+
+\item{subtitle}{The map subtitile in smaller grey font than the title. Set to NULL unless specified}
+
+\item{titlesize}{A ratio value to increase or decrease the title and subtitle. Initially set to 1}
 
 \item{map_colours}{The colour which you want to represent the low and high values, must be in vector form}
 
@@ -40,5 +52,6 @@ Create a standard theme map from an sf object
 }
 \examples{
 df <- dluhctheme::Help_to_Buy
-LA_map(df,variable = Completions,LA_col = LA_Code,year = "2020-21",countries = "E",save = FALSE)
+a <- LA_map(df,variable = Completions,LA_col = LA_Code,year = "2020-21",countries = "E",save = TRUE,filepath = "Image.png",title="Help to Buy is popular near London",legendtitle = "Completions",titlesize=2)
+finalise_plot(a,source_name = "Source: Help to Buy Equity Loan Statistics DLUHC",save_filepath = "outputmap.png",footerfontsize = 13,width_pixels = 560,height_pixels = 640,logo_nudge = -0.03)
 }

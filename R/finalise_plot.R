@@ -9,6 +9,7 @@
 #' @param logo_image_path File path for the logo image you want to use in the right hand side of your chart,
 #'  which needs to be a PNG file - defaults to DLUHC image that sits within the data folder of your package
 #' @param footerfontsize Size of the font used in the footer
+#' @param logo_nudge A numeric value to move the logo left or right with, initially set to 0. Negative decimal values will move it left
 #' @return (Invisibly) an updated ggplot object.
 #' @examples
 #' df <- data.frame(replicate(2,sample(1:19,100,rep=TRUE)))
@@ -33,7 +34,8 @@ finalise_plot <- function(plot_name,
                           height_pixels=450,
                           logo_image_path = file.path(system.file("data", package = 'dluhctheme'),"DLUHC_Logo.png"),
                           footerfontsize = 18,
-                          save = TRUE) {
+                          save = TRUE,
+                          logo_nudge = 0) {
 
   save_plot <- function (plot_grid, width, height, save_filepath) {
     grid::grid.draw(plot_grid)
@@ -55,7 +57,7 @@ finalise_plot <- function(plot_name,
     footer <- grid::grobTree(grid::linesGrob(x = grid::unit(c(0, 1), "npc"), y = grid::unit(1.1, "npc")),
                              grid::textGrob(source_name,
                                             x = 0.004, hjust = 0, gp = grid::gpar(fontsize=footerfontsize)),
-                             grid::rasterGrob(png::readPNG(logo_image_path), x = 0.89))
+                             grid::rasterGrob(png::readPNG(logo_image_path), x = 0.89+logo_nudge))
     return(footer)
 
   }

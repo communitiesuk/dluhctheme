@@ -13,7 +13,8 @@ finalise_plot(
   logo_image_path = file.path(system.file("data", package = "dluhctheme"),
     "DLUHC_Logo.png"),
   footerfontsize = 18,
-  save = TRUE
+  save = TRUE,
+  logo_nudge = 0
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ finalise_plot(
 which needs to be a PNG file - defaults to DLUHC image that sits within the data folder of your package}
 
 \item{footerfontsize}{Size of the font used in the footer}
+
+\item{logo_nudge}{A numeric value to move the logo left or right with, initially set to 0. Negative decimal values will move it left}
 }
 \value{
 (Invisibly) an updated ggplot object.
