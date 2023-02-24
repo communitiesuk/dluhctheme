@@ -41,7 +41,7 @@ finalise_plot <- function(plot_name,
     grid::grid.draw(plot_grid)
     #save it
     ggplot2::ggsave(filename = save_filepath,
-                    plot=plot_grid, width=(width/96), height=(height/96),  bg="white")
+                    plot=plot_grid, width=(width/96), height=(height/96), dpi = 96,  bg="white")
   }
 
   #Left align text
