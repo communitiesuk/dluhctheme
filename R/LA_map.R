@@ -88,7 +88,10 @@ LA_map <- function(.data,variable,legendtitle = NULL,LA_col,title = NULL, subtit
     dplyr::left_join(LA_map_data,., by = c("LA_Code")) |>
     sf::st_as_sf()
 
-  matched_rows <- nrow(dplyr::inner_join(.data,as.data.frame(LA_map_data),by=c("LA_Code")))
+  matched_rows <- .data |>
+    dplyr::mutate(LA_Code = {{LA_col}}) |>
+    dplyr::inner_join(.,as.data.frame(LA_map_data),by=c("LA_Code")) |>
+    nrow()
 
   print(paste0("Your original data had ",original_rows," rows of data"))
   print(paste0("On the map, there were ",matched_rows," matches, from ",nrow(LA_map_data)," LAs on the map"))
