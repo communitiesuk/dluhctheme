@@ -25,13 +25,13 @@ This package has been copied from the much better BBC bbplot, and reapplied to w
 
 ### Install the dluhctheme package
 
-`dluhctheme` is not on CRAN, so you will have to install it directly from Github using `devtools`. 
+`dluhctheme` is not on CRAN, so you will have to install it directly from Github using `pak`. 
 
-If you do not have the `devtools` package installed, you will have to run the first line in the code below as well. 
+If you do not have the `pak` package installed, you will have to run the first line in the code below as well. 
 
 ``` {r eval = FALSE}
-# install.packages('devtools')
-devtools::install_github('communitiesuk/dluhctheme')
+# install.packages('pak')
+pak::pak('communitiesuk/dluhctheme')
 ```
 
 For more info on `dluhctheme` check out the [package's Github repo](https://github.com/communitiesuk/dluhctheme), but most of the details about how to use the package and its functions are detailed below. 
