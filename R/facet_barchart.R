@@ -15,22 +15,21 @@
 #' df$year <- substr(df$Year,7,10)
 #' facet_barchart(df,xcol = year,ycol = Net_Additions,groupcol=Region)
 facet_barchart <- function(.data,xcol,ycol,groupcol,textsize=1,diffcolours=TRUE){
-.data <- dplyr::mutate(.data,variable = {{groupcol}})
+.data <- dplyr::mutate(.data, variable = {{groupcol}})
 
 barplot <- ggplot2::ggplot(data = .data,ggplot2::aes(x={{xcol}},y={{ycol}},fill=variable)) +
   ggplot2::geom_bar(stat="identity") +
   ggplot2::facet_wrap(~factor(variable), scales='fixed',strip.position="top") +
   dluhctheme::dluhc_style(size = textsize) +
   ggplot2::theme(legend.position = "none")
-
 if(diffcolours){
   barplot <- barplot +
-    ggplot2::scale_fill_manual(values= c("#012169","#7B2876","#C5406E","#F4745D","#FFB454","#F9F871","#012169","#7B2876","#C5406E","#F4745D","#FFB454","#F9F871","#012169","#7B2876","#C5406E","#F4745D","#FFB454","#F9F871"))
+    ggplot2::scale_fill_manual(values= rep(dluhc_palettes$categorical),
+                            ceiling(n_distinct(.data$variable)/length(dluhc_palettes$categorical)))
 }else{
   barplot <- barplot +
-    ggplot2::scale_fill_manual(values= c("#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169","#012169"))
+    ggplot2::scale_fill_manual(values= rep(dluhc_blue, n_distinct(.data$variable)))
 }
 return(barplot)
 
 }
-

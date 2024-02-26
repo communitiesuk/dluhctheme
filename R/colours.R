@@ -15,12 +15,23 @@ dluhc_palettes <- list(
     "#6C558F", # Mid Purple
     "#4A2E29",  # Light Brown
     "#4C4C4F" # Dark Grey
-  )
+  ),
 
   # Our colours are red and blue
   duo = c(
     "#012169", # Union Blue
-    "#C8102E", # Union Red
+    "#C8102E" # Union Red
+  ),
+
+  # This is the old colour palette, which is prettier and 
+  # sequential, but doesn't use the brand colours
+  sequential = c(
+    "#012169",
+    "#7B2876",
+    "#C5406E",
+    "#F4745D",
+    "#FFB454",
+    "#F9F871"
   )
 )
 

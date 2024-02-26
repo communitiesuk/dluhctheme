@@ -32,6 +32,6 @@ one_line_timeseries <- function(.data,datecol,ycol,dateformat="%Y-%m-%d"){
     dplyr::mutate(value = {{ycol}})
 
   ggplot2::ggplot(data = .data,ggplot2::aes(x = Date,y = value)) +
-    ggplot2::geom_line(size = 1.5, color = "#012169") +
+    ggplot2::geom_line(size = 1.5, color = dluhc_blue) +
     dluhctheme::dluhc_style()
 }

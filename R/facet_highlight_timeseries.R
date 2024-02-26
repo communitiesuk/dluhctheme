@@ -33,8 +33,8 @@ facet_highlight_timeseries <-
       dplyr::mutate(GROUP = {{groupcol}})
 
     ggplot2::ggplot(.data, mapping=ggplot2::aes(x=Date, y=value)) +
-      ggplot2::geom_line(show.legend = FALSE, col = "#012169" , size = 1.5) +
-      ggplot2::geom_line(ggplot2::aes(Date,value,colour=GROUP), colour = "#012169")+
+      ggplot2::geom_line(show.legend = FALSE, col = dluhc_blue , size = 1.5) +
+      ggplot2::geom_line(ggplot2::aes(Date,value,colour=GROUP), colour = dluhc_blue) +
       ggplot2::facet_wrap(~ GROUP, scales='free',strip.position="top") +
     gghighlight::gghighlight(use_direct_label = FALSE) +
     dluhctheme::dluhc_style(size = textsize)

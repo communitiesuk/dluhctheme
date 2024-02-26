@@ -15,12 +15,16 @@ Imports:
     ggplot2,
     dplyr,
     sf,
-    cowplot
+    cowplot,
+    gghighlight
 Depends: 
     R (>= 2.10)
 URL: https://communitiesuk.github.io/dluhctheme/
 Suggests: 
     tidyverse,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0),
+    colorblindcheck
 VignetteBuilder: knitr
+Config/testthat/edition: 3

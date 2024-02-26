@@ -46,7 +46,7 @@ duplicate <- .data |>
 
 
   a <- ggplot2::ggplot(data = .data,ggplot2::aes(x = Date,y = value)) +
-    ggplot2::geom_line(ggplot2::aes(linetype = factor(prediction,levels = c(label_names[1],label_names[2]))),size = 1.5, color = "#012169") +
+    ggplot2::geom_line(ggplot2::aes(linetype = factor(prediction,levels = c(label_names[1],label_names[2]))),size = 1.5, color = dluhc_blue) +
     dluhctheme::dluhc_style() +
     ggplot2::scale_linetype_manual(values = c("solid","dashed")) +
     ggplot2::theme(legend.key.width = ggplot2::unit(2,"cm"))
