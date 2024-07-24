@@ -45,9 +45,9 @@ LA_map <- function(.data,variable,legendtitle = NULL,LA_col,title = NULL, subtit
 
   map_match <-
     data.frame(
-      year = c("2020-21","2021-22","2022-23"),
-      filenames = c("LAD_Dec2020_BUC","LAD_May2021_BUC","LAD_Dec2022_BUC"),
-      LA_Column = c("LAD20CD","LAD21CD","LAD22CD")
+      year = c("2020-21","2021-22","2022-23","2023-24"),
+      filenames = c("LAD_Dec2020_BUC","LAD_May2021_BUC","LAD_Dec2022_BUC","LAD_Dec2023_BUC"),
+      LA_Column = c("LAD20CD","LAD21CD","LAD22CD","LAD23CD")
     )
 
   if(!(year %in% map_match$year)){
@@ -68,8 +68,10 @@ LA_map <- function(.data,variable,legendtitle = NULL,LA_col,title = NULL, subtit
     LA_map_data <- sf::st_as_sf(dluhctheme::LAD_Dec2020_BUC)
   }else if(year == "2021-22"){
     LA_map_data <- sf::st_as_sf(dluhctheme::LAD_May2021_BUC)
-  }else{
+  }else if(year == "2022-23"){
      LA_map_data <- sf::st_as_sf(dluhctheme::LAD_Dec2022_BUC)
+  }else{
+    LA_map_data <- sf::st_as_sf(dluhctheme::LAD_Dec2023_BUC)
   }
 
 

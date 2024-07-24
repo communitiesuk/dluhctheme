@@ -11,6 +11,8 @@
 #' @param footerfontsize Size of the font used in the footer
 #' @param logo_nudge A numeric value to move the logo left or right with, initially set to 0. Negative decimal values will move it left
 #' @return (Invisibly) an updated ggplot object.
+#' @export
+#'
 #' @examples
 #' df <- data.frame(replicate(2,sample(1:19,100,rep=TRUE)))
 #' myplot <- ggplot2::ggplot(data = df,ggplot2::aes(x = X1,y=X2)) +
