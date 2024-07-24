@@ -13,7 +13,8 @@ finalise_plot(
   logo_image_path = file.path(system.file("data", package = "dluhctheme"),
     "DLUHC_Logo.png"),
   footerfontsize = 18,
-  save = TRUE
+  save = TRUE,
+  logo_nudge = 0
 )
 }
 \arguments{
@@ -31,12 +32,13 @@ finalise_plot(
 which needs to be a PNG file - defaults to DLUHC image that sits within the data folder of your package}
 
 \item{footerfontsize}{Size of the font used in the footer}
+
+\item{logo_nudge}{A numeric value to move the logo left or right with, initially set to 0. Negative decimal values will move it left}
 }
 \value{
 (Invisibly) an updated ggplot object.
 }
 \description{
-Running this function will save your plot with the correct guidelines for publication for a BBC News graphic.
 It will left align your source, add the DLUHC logo at the bottom right and save it to your specified location.
 }
 \examples{
@@ -56,4 +58,3 @@ save = TRUE
 )
 
 }
-\keyword{finalise_plot}

@@ -250,16 +250,21 @@ The “DLUHC colours” for a multi-line time series are contained within a func
 
 ### dluhctheme function
 ```{r warning = FALSE, message = FALSE}
-multi_line_timeseries(.data = Social_Housing_Sales,
-                      datecol = year, 
-                      ycol = count, 
-                      groupcol = type, 
+kable(head(dluhctheme::Net_Additions_Regional))
+
+multi_line_df <- dluhctheme::Net_Additions_Regional %>%
+  filter(Region %in% c("North East","North West","East Midlands","South East"))
+
+multi_line_timeseries(.data = multi_line_df,
+                      datecol = Year, 
+                      ycol = Net_Additions, 
+                      groupcol = Region, 
                       dateformat = "%d/%m/%Y")
 ```
 
 This function works identically to the one_line_timeseries function with the addition of the `groupcol` variable which is the variable to denote how the data is split. 
 
-To use this function, your data must be in the same format as the `Social_Housing_Sales` dataset, with one column for the date, one for the numeric value and one for the category variable.
+To use this function, your data must be in the same format as the `Social_Housing_Sales` data-set, with one column for the date, one for the numeric value and one for the category variable.
 
 This function sets up to five different colours for a line chart. If you want to use more than 5 colours, it is suggested that you break the graphs up into separate facets and use a function like the one below:
 
@@ -302,6 +307,11 @@ The facet_wrap function is made of 2 parts, the first is to separate which varia
 
 ### dluhctheme function
 There is also a standard function built into the `dluhctheme` package which allows you to create a highlighted faceted graph in one step, like the previous functions
+```{r warning=FALSE, message=FALSE,echo=FALSE}
+#This line of code installs the pacman page if you do not have it installed - if you do, it simply loads the package
+if(!require(gghighlight))install.packages("gghighlight")
+
+```
 
 ```{r warning=FALSE,message=FALSE}
 facet_graph <- facet_highlight_timeseries(.data = Net_Additions_Regional,
@@ -328,24 +338,24 @@ facet_graph +
 ### Creating a forecast time series
 Sometimes you may want to present data on a graph of which some of the data is recorded data and some is a prediction or forecast. There are a few different ways to achieve this.
 
-The example dataset for this is the `GDP_Deflator` data contained in the dluhctheme package
+The example dataset for this is the `OBR_Forecast` data contained in the dluhctheme package
 ```{r}
-knitr::kable(GDP_Deflator)
+knitr::kable(head(OBR_Forecast))
 ```
 
-All the data up to 31/03/2022 is recorded data, and all afterwards is preidiction
+All the data up to 30/09/2022 is recorded data, and all afterwards is prediction
 
-The most simple method is to add a dotted line vertically on the graph to denoe where the predictions begin from.
+The most simple method is to add a dotted line vertically on the graph to denote where the predictions begin from.
 
 ```{r}
 #As with the previous examples, the date needs cleaning before running. 
-Forecast_df <- GDP_Deflator %>%
-  mutate(date = as.Date(year,tryFormats = "%d/%m/%Y"))
+Forecast_df <- OBR_Forecast %>%
+  mutate(date = as.Date(Date,tryFormats = "%d/%m/%Y"))
 
 Forecast_df %>%
-  ggplot(aes(x = date, y=GDP)) +
+  ggplot(aes(x = date, y=Inflation)) +
   geom_line(linewidth = 2,colour="blue") +
-  geom_vline(xintercept = as.Date("2022-03-31"),linewidth = 1.5,linetype="dashed") +
+  geom_vline(xintercept = as.Date("2022-10-01"),linewidth = 1.5,linetype="dashed") +
   dluhc_style()
 ```
 
@@ -353,16 +363,16 @@ Another method would be to have the lines go from a solid line to a dashed line.
 
 ```{r}
 Forecast_df_2 <- Forecast_df %>%
-  mutate(type =ifelse(date <= as.Date("2022-03-31"),"Actual","Predicted")) %>%
-  add_row(year = "31/03/2022",date = as.Date("2022-03-31"),GDP=100,type = "Predicted") %>%
+  mutate(type =ifelse(date <= as.Date("2022-09-30"),"Actual","Predicted")) %>%
+  add_row(Date = "30/09/2022",date = as.Date("2022-09-30"),Inflation=9.7,type = "Predicted") %>%
   arrange(date)
 
-knitr::kable(Forecast_df_2)
+knitr::kable(head(Forecast_df_2))
 ```
 
 ```{r}
 Forecast_df_2 %>%
-  ggplot(aes(x = date,y=GDP,group=type)) +
+  ggplot(aes(x = date,y=Inflation,group=type)) +
   geom_line(aes(linetype = type), linewidth = 1.2, colour = "blue") +
   dluhc_style()
 ```
@@ -371,16 +381,16 @@ Forecast_df_2 %>%
 This is quite a long process, so a function has been created which will do this for you: `forecast_timeseries()`
 
 ```{r}
-forecast_timeseries(.data = GDP_Deflator,
-                    datecol = year,
-                    ycol = GDP,
-                    cutdate = "01/04/2022",
+forecast_timeseries(.data = OBR_Forecast,
+                    datecol = Date,
+                    ycol = Inflation,
+                    cutdate = "01/10/2022",
                     dateformat = "%d/%m/%Y",
                     dottedline = TRUE,
                     label_names = c("Recorded","Forecast") )
 ```
 
-* `cutdate` is the first day after the last recorded value (1st April 2022 is after 31st March 2022)
+* `cutdate` is the first day after the last recorded value (1st October 2022 is after 30th September 2022)
 * `dottedline` is a TRUE/FALSE variable, to whether you want a vertical dotted line at the cut date
 * `label_names` are the names given to the two lines
 
@@ -511,10 +521,24 @@ facet_bars
 
 ```
 
+### dluhctheme function
+Again there is a function for directly creating faceted bar charts straight from the data.
+Using the `Net_Additions_Regional` data, as in the faceted line graph example
+
+```{r}
+facet_df <- dluhctheme::Net_Additions_Regional %>%
+  filter(Region %in% c("North East","North West","East Midlands","South East","South West","London")) %>%
+  mutate(year = as.Date(Year,tryFormats="%d/%m/%Y"))
+facet_barchart(.data = facet_df ,
+               xcol = year,
+               ycol=Net_Additions,
+               groupcol = Region
+               )
+```
 ## Static LA Maps
 The package also allows you to create maps, currently only at LA level, using the LA_map function.
 
-To create the map your data must have a column for the LA codes in the proper ONS format, not that mad loopy format that LPA use!
+To create the map your data must have a column for the LA codes in the proper ONS format.
 
 The example data for this is the number of help to buy sales in each local authority
 

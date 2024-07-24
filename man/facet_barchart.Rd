@@ -4,7 +4,7 @@
 \alias{facet_barchart}
 \title{Title}
 \usage{
-facet_barchart(.data, xcol, ycol, groupcol, textsize = 1)
+facet_barchart(.data, xcol, ycol, groupcol, textsize = 1, diffcolours = TRUE)
 }
 \arguments{
 \item{.data}{A dataframe containing your data, ideally a 3 column dataframe with one value column and two categorical columns}
@@ -16,6 +16,8 @@ facet_barchart(.data, xcol, ycol, groupcol, textsize = 1)
 \item{groupcol}{The column which contains the categorical variable which the graphs will be faceted by}
 
 \item{textsize}{The text size, initially set to 1, the size is a ratio to the normal dluhc_style size of 2}
+
+\item{diffcolours}{A TRUE/FALSE variable which determines if you want each of the charts to have the same colour, or for each graph to have one of the six colours from the DLUHC theme. If you want neither of these options, this can be overridden with the scale_fill_manual() ggplot function.}
 }
 \value{
 a ggplot object
@@ -25,6 +27,7 @@ Title
 }
 \examples{
 df <- dluhctheme::Net_Additions_Regional
+df <- dplyr::filter(df,Region \%in\% c("North East","North West","South East","South West","London", "East Midlands"))
 df$year <- substr(df$Year,7,10)
 facet_barchart(df,xcol = year,ycol = Net_Additions,groupcol=Region)
 }

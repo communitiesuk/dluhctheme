@@ -3,7 +3,7 @@ Type: Package
 Title: Creates a Consistent ggplot Theme for DLUHC Graphs 
 Version: 0.1.0
 Author: Analysis and Data Direcotrate (DLUHC)
-Maintainer: RAP Working Group <email@email.com>
+Maintainer: RAP Working Group <jamie.thomas@levellingup.gov.uk>
 Description: This package contains a generic theme function for any graph to get into a consistent DLUHC style.
     The package also contains full functions which create graphs based on pre-determined inputs
 License: Open
@@ -11,13 +11,16 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
 Imports: 
-    tidyverse,
+    tidyr,
+    ggplot2,
+    dplyr,
     sf,
     cowplot
 Depends: 
     R (>= 2.10)
 URL: https://communitiesuk.github.io/dluhctheme/
 Suggests: 
+    tidyverse,
     knitr,
     rmarkdown
 VignetteBuilder: knitr

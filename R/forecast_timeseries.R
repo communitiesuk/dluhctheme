@@ -11,8 +11,8 @@
 #' @export
 #'
 #' @examples
-#' df <- dluhctheme::GDP_Deflator
-#' forecast_timeseries(df,year,ycol=GDP,cutdate = "01/04/2022",dateformat = "%d/%m/%Y", label_names = c("Actual","Predicted"))
+#' df <- dluhctheme::OBR_Forecast
+#' forecast_timeseries(df,Date,ycol=Inflation,cutdate = "01/10/2022",dateformat = "%d/%m/%Y", label_names = c("Actual","Predicted"))
 forecast_timeseries <- function(.data,datecol,ycol,cutdate,dateformat="%Y-%m-%d",dottedline=TRUE,label_names = c("Recorded","Forecast")){
 
   is.convertible.to.date <- function(x) !is.na(as.Date(as.character(x), tz = 'UTC', format = dateformat))

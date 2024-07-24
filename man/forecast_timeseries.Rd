@@ -36,6 +36,6 @@ a ggplot2 object
 Create a single line time series graph in a dluhc theme for a line which has a predicted/forecast value
 }
 \examples{
-df <- dluhctheme::GDP_Deflator
-forecast_timeseries(df,year,ycol=GDP,cutdate = "01/04/2022",dateformat = "\%d/\%m/\%Y", label_names = c("Actual","Predicted"))
+df <- dluhctheme::OBR_Forecast
+forecast_timeseries(df,Date,ycol=Inflation,cutdate = "01/10/2022",dateformat = "\%d/\%m/\%Y", label_names = c("Actual","Predicted"))
 }

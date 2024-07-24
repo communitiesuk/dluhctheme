@@ -1,6 +1,5 @@
 #' Arrange alignment and save DLUHC ggplot chart
 #'
-#' Running this function will save your plot with the correct guidelines for publication for a BBC News graphic.
 #' It will left align your source, add the DLUHC logo at the bottom right and save it to your specified location.
 #' @param plot_name The variable name of the plot you have created that you want to format and save
 #' @param source_name The text you want to come after the text 'Source:' in the bottom left hand side of your side
@@ -10,8 +9,10 @@
 #' @param logo_image_path File path for the logo image you want to use in the right hand side of your chart,
 #'  which needs to be a PNG file - defaults to DLUHC image that sits within the data folder of your package
 #' @param footerfontsize Size of the font used in the footer
+#' @param logo_nudge A numeric value to move the logo left or right with, initially set to 0. Negative decimal values will move it left
 #' @return (Invisibly) an updated ggplot object.
-#' @keywords finalise_plot
+#' @export
+#'
 #' @examples
 #' df <- data.frame(replicate(2,sample(1:19,100,rep=TRUE)))
 #' myplot <- ggplot2::ggplot(data = df,ggplot2::aes(x = X1,y=X2)) +
@@ -35,13 +36,14 @@ finalise_plot <- function(plot_name,
                           height_pixels=450,
                           logo_image_path = file.path(system.file("data", package = 'dluhctheme'),"DLUHC_Logo.png"),
                           footerfontsize = 18,
-                          save = TRUE) {
+                          save = TRUE,
+                          logo_nudge = 0) {
 
   save_plot <- function (plot_grid, width, height, save_filepath) {
     grid::grid.draw(plot_grid)
     #save it
     ggplot2::ggsave(filename = save_filepath,
-                    plot=plot_grid, width=(width/72), height=(height/72),  bg="white")
+                    plot=plot_grid, width=(width/96), height=(height/96), dpi = 96,  bg="white")
   }
 
   #Left align text
@@ -57,7 +59,7 @@ finalise_plot <- function(plot_name,
     footer <- grid::grobTree(grid::linesGrob(x = grid::unit(c(0, 1), "npc"), y = grid::unit(1.1, "npc")),
                              grid::textGrob(source_name,
                                             x = 0.004, hjust = 0, gp = grid::gpar(fontsize=footerfontsize)),
-                             grid::rasterGrob(png::readPNG(logo_image_path), x = 0.89))
+                             grid::rasterGrob(png::readPNG(logo_image_path), x = 0.89+logo_nudge))
     return(footer)
 
   }

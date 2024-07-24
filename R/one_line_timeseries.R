@@ -15,23 +15,23 @@
 #' one_line_timeseries(.data=df,datecol = year, ycol = count, dateformat = "%d/%m/%Y")
 
 one_line_timeseries <- function(.data,datecol,ycol,dateformat="%Y-%m-%d"){
-  library(tidyverse)
+
   is.convertible.to.date <- function(x) !is.na(as.Date(as.character(x), tz = 'UTC', format = dateformat))
 
-  if(any(is.convertible.to.date(pull(.data,{{datecol}}))==FALSE)){
+  if(any(is.convertible.to.date(dplyr::pull(.data,{{datecol}}))==FALSE)){
     stop("Date column not in format specified, or contains some NA values. Check the dateformat argument in the function")
   }
 
-  if(any(replace_na(is.numeric(pull(.data,{{ycol}})),TRUE)==FALSE)){
+  if(any(tidyr::replace_na(is.numeric(dplyr::pull(.data,{{ycol}})),TRUE)==FALSE)){
     stop("Value column contains non-numeric values. Check your data and try again")
   }
 
 
-  .data <- .data %>%
-    mutate(Date = as.Date(as.character({{datecol}}),tryFormats = dateformat)) %>%
-    mutate(value = {{ycol}})
+  .data <- .data |>
+    dplyr::mutate(Date = as.Date(as.character({{datecol}}),tryFormats = dateformat)) |>
+    dplyr::mutate(value = {{ycol}})
 
-  ggplot2::ggplot(data = .data,aes(x = Date,y = value)) +
-    geom_line(size = 1.5, color = "#012169") +
+  ggplot2::ggplot(data = .data,ggplot2::aes(x = Date,y = value)) +
+    ggplot2::geom_line(size = 1.5, color = "#012169") +
     dluhctheme::dluhc_style()
 }

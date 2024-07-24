@@ -42,16 +42,16 @@ multi_line_timeseries <- function(.data,datecol,ycol,groupcol,dateformat = "%Y-%
 
   if(variable_count == 2){
     graph <- graph +
-      ggplot2::scale_color_manual(values=c("#012169","#6b98fe"))
+      ggplot2::scale_color_manual(values=c("#012169","#F4745D"))
   }else if(variable_count == 3){
     graph <- graph +
-      ggplot2::scale_color_manual(values=c("#012169","#6b98fe","orange"))
+      ggplot2::scale_color_manual(values=c("#012169","#C5406E","#FFB454"))
   }else if(variable_count == 4){
     graph <- graph +
-      ggplot2::scale_color_manual(values=c("#012169","#6b98fe","orange","green"))
+      ggplot2::scale_color_manual(values=c("#012169","#C5406E","#F4745D","#FFB454"))
   }else if(variable_count == 5){
     graph <- graph +
-      ggplot2::scale_color_manual(values=c("#012169","#6b98fe","orange","green","black"))
+      ggplot2::scale_color_manual(values=c("#012169","#7B2876","#C5406E","#F4745D","#FFB454"))
   }else{
     stop("This function only allows for plotting up to 5 categories (lines) on one graph. If your grouping variable has more than 5 categories, it is suggested you use the facet_timeseries or facet_highlight_timeseries function")
   }
