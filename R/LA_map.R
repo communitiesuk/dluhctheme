@@ -54,6 +54,7 @@ LA_map <- function(.data,variable,legendtitle = NULL,LA_col,title = NULL, subtit
     stop("The year you have selected is outside the range of maps available. Please contact the package owner to update the maps available")
   }
 
+
   rawdata_LA_Col <- .data |>
   dplyr::pull({{LA_col}})
 
