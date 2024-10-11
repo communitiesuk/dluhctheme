@@ -160,4 +160,4 @@ LA_map <- function(.data,variable,legendtitle = NULL,LA_col,title = NULL, subtit
   }
       return(finalmap)
 
-}
+}#
